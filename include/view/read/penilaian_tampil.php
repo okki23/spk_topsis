@@ -17,30 +17,30 @@ $sql_kriteria="SELECT id_kriteria,nama_kriteria FROM kriteria ORDER BY id_kriter
 $hasil_kriteria=mysqli_query($db_link,$sql_kriteria);
 $total_kriteria=mysqli_num_rows($hasil_kriteria);
 
-$get_user_cek=mysqli_query ($db_link,"SELECT A.id_toko FROM jabatan_pegawai A
+$get_user_cek=mysqli_query ($db_link,"SELECT A.id_unit_kerja FROM jabatan_pegawai A
                             INNER JOIN pegawai B ON A.id_pegawai=B.no_pegawai
                             INNER JOIN user c ON B.no_pegawai=c.id_pegawai
                             WHERE c.user_name=CASE WHEN $hak_akses=3 
                 THEN '".$username."' ELSE c.user_name END ");
-$get_toko_user=mysqli_fetch_assoc($get_user_cek);
+$get_unit_kerja_user=mysqli_fetch_assoc($get_user_cek);
 
-$sql_penilaian="SELECT DISTINCT A.id_nilai,D.nama_toko,C.nama,B.id_jabatan,A.status FROM penilaian A
+$sql_penilaian="SELECT DISTINCT A.id_nilai,D.nama_unit_kerja,C.nama,B.id_jabatan,A.status FROM penilaian A
                 INNER JOIN jabatan_pegawai B ON A.id_jabatan=B.id_jabatan
                 INNER JOIN pegawai C ON B.id_pegawai=C.no_pegawai
-                INNER JOIN toko D ON B.id_toko=D.id_toko
-                WHERE D.id_toko=(CASE WHEN $hak_akses =3 
-                THEN ".$get_toko_user['id_toko']." ELSE B.id_toko END)
-				AND B.id_toko=(CASE WHEN $hak_akses =4 
-                THEN ".$get_toko_user['id_toko']." ELSE B.id_toko END)
+                INNER JOIN unit_kerja D ON B.id_unit_kerja=D.id_unit_kerja
+                WHERE D.id_unit_kerja=(CASE WHEN $hak_akses =3 
+                THEN ".$get_unit_kerja_user['id_unit_kerja']." ELSE B.id_unit_kerja END)
+				AND B.id_unit_kerja=(CASE WHEN $hak_akses =4 
+                THEN ".$get_unit_kerja_user['id_unit_kerja']." ELSE B.id_unit_kerja END)
                 ORDER BY C.nama asc, A.Status desc";
 $hasil_penilaian=mysqli_query($db_link,$sql_penilaian);
-        echo '<table class="table table-bordered table-hover text-center panel panel-primary" >
+        echo '<table class="table table-bordered table-hover text-center panel panel-primary" id="example">
                     
                 <thead class="panel-heading">
                 <tr>
                     <th class="text-center" rowspan="2" style="vertical-align: middle;">NO</th>
                     <th class="text-center" rowspan="2" style="vertical-align: middle;">NAMA PEGAWAI</th>
-                    <th class="text-center" rowspan="2" style="vertical-align: middle;" width="90">TOKO</th>
+                    <th class="text-center" rowspan="2" style="vertical-align: middle;" width="90">unit_kerja</th>
                     <th class="text-center" colspan="'.$total_kriteria.'">KRITERIA</th>
                     <th class="text-center" rowspan="2" style="vertical-align: middle;">BAGIAN</th>
                     <th class="text-center" rowspan="2" style="vertical-align: middle;">JABATAN</th>
@@ -66,7 +66,7 @@ $hasil_penilaian=mysqli_query($db_link,$sql_penilaian);
             echo "  
                 <td></td>
                 <td>{$data_penilaian['nama']}</td>
-                <td>{$data_penilaian['nama_toko']}</td>";
+                <td>{$data_penilaian['nama_unit_kerja']}</td>";
                 $sql_jabatan="SELECT B.jabatan,C.bagian FROM penilaian A
                 INNER JOIN jabatan_pegawai B ON A.id_jabatan=B.id_jabatan
                 INNER JOIN bagian C ON B.id_bagian=C.id_bagian

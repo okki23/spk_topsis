@@ -2,22 +2,17 @@
 	<h2 class="text-center">DAFTAR JABATAN PEGAWAI</h2> 
 	<div class="panel-group">
 	<div class="panel panel-default" style="padding:10px">
-            <div class="col-sm-3 input-group pull-right">
-         <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-        <input type="text" class="form-control" id="nama" placeholder="Search">
-        <span class="input-group-btn">
-        <button id="showall" class="btn btn-danger pull-right"><i class="glyphicon glyphicon-align-justify"></i></button>
-        </span>
-        </div>
+            
+       
         <br/><br/>
 		<div class="panel panel-default">
-			<table class="table table-bordered table-hover text-center panel panel-primary">
+			<table class="table table-bordered table-hover text-center panel panel-primary" id="example">
 				<thead class="panel-heading">
 					<tr>
 						<th class="text-center">NO</th>
 						<th class="text-center">NO PEGAWAI</th>
 						<th class="text-center">NAMA PEGAWAI</th>
-						<th class="text-center">TOKO</th>
+						<th class="text-center">UNIT KERJA</th>
 						<th class="text-center">BAGIAN</th>
 						<th class="text-center">JABATAN</th>
 						<th class="text-center">MULAI TUGAS</th>
@@ -27,19 +22,19 @@
 				</thead>
 				<tbody>
 					<?php /*php pembuka tabel atas*/
-							$sql = "SELECT A.id_jabatan,B.no_pegawai,B.nama,C.nama_toko,D.bagian,A.jabatan,A.tgl_jabat,A.Status
+							$sql = "SELECT A.id_jabatan,B.no_pegawai,B.nama,C.nama_unit_kerja,D.bagian,A.jabatan,A.tgl_jabat,A.Status
                                     FROM jabatan_pegawai A
                                     INNER JOIN pegawai B ON A.id_pegawai=B.no_pegawai
-                                    INNER JOIN toko C ON A.id_toko=C.id_toko
+                                    INNER JOIN unit_kerja C ON A.id_unit_kerja=C.id_unit_kerja
                                     INNER JOIN bagian D ON A.id_bagian=D.id_bagian 
 										LEFT JOIN user bb ON b.no_pegawai=bb.id_pegawai
-										WHERE  A.id_toko=
+										WHERE  A.id_unit_kerja=
 							CASE WHEN $hak_akses=3 THEN
-							(SELECT  id_toko FROM jabatan_pegawai a 
+							(SELECT  id_unit_kerja FROM jabatan_pegawai a 
 							INNER JOIN pegawai b ON a.id_pegawai=b.no_pegawai
 							INNER JOIN user c ON b.no_pegawai=c.id_pegawai
 							WHERE c.user_name='$username' limit 1)  
-							ELSE A.id_toko END
+							ELSE A.id_unit_kerja END
 							AND A.id_bagian=
 							CASE WHEN $hak_akses=3 THEN(SELECT  id_bagian FROM jabatan_pegawai a 
 							INNER JOIN pegawai b ON a.id_pegawai=b.no_pegawai
@@ -60,7 +55,7 @@ ELSE 0 END
                             echo "  <td>$no</td>
 									<td>{$data['no_pegawai']}</td>
                                     <td>{$data['nama']}</td>
-									<td>".$data['nama_toko']."</td>
+									<td>".$data['nama_unit_kerja']."</td>
 									<td>{$data['bagian']}</td>
 									<td>";
 									echo ucwords($data['jabatan']); 
@@ -104,7 +99,11 @@ ELSE 0 END
 <script src="../vendor/jquery/jquery.min.js"></script>
 
 <script>
+ 
+ 
 	 $(document).ready(function () {
+		 
+		$('#example').DataTable();
         $("#tambah").click(function () {
            		window.location.replace("index.php?navigasi=jabatan_pegawai&crud=tambah");
           });

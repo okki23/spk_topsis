@@ -7,9 +7,9 @@
              $pegawai=("SELECT A.no_pegawai,A.nama from pegawai A
                  ");
             $pegawai_query = mysqli_query($db_link,$pegawai);
-            $toko=("SELECT A.id_toko,A.nama_toko from toko A
+            $unit_kerja=("SELECT A.id_unit_kerja,A.nama_unit_kerja from unit_kerja A
                  ");
-            $toko_query = mysqli_query($db_link,$toko);
+            $unit_kerja_query = mysqli_query($db_link,$unit_kerja);
             $bagian=("SELECT A.id_bagian,A.bagian from bagian A
                  ");
             $bagian_query = mysqli_query($db_link,$bagian);
@@ -39,14 +39,14 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-4" for="toko">Toko : </label>
+                        <label class="control-label col-sm-4" for="unit_kerja">Unit Kerja : </label>
                         <div class="col-sm-6">
-                                <select  class="form-control" name="toko" id="toko">  
+                                <select  class="form-control" name="unit_kerja" id="unit_kerja">  
                                 <?php
-                                    while ($toko_tampil=mysqli_fetch_assoc($toko_query)){
-                                        echo "<option value='".$toko_tampil['id_toko']."'";
-                                        if ($row['id_toko']==$toko_tampil['id_toko']) echo "selected='selected'";
-                                        echo ">".$toko_tampil['nama_toko']."</option>";
+                                    while ($unit_kerja_tampil=mysqli_fetch_assoc($unit_kerja_query)){
+                                        echo "<option value='".$unit_kerja_tampil['id_unit_kerja']."'";
+                                        if ($row['id_unit_kerja']==$unit_kerja_tampil['id_unit_kerja']) echo "selected='selected'";
+                                        echo ">".$unit_kerja_tampil['nama_unit_kerja']."</option>";
                                     }
                                 ?>
                             </select> 
@@ -116,7 +116,7 @@
           $("#simpan").click(function () {
             var id_jabatan = $('input[name=id_jabatan]').val();
             var id_pegawai = $('select[name=pegawai]').val();
-            var id_toko= $('select[name=toko]').val();
+            var id_unit_kerja= $('select[name=unit_kerja]').val();
             var id_bagian= $('select[name=bagian]').val();
             var jabatan= $('select[name=jabatan]').val();
             var status= $('select[name=status]').val();
@@ -126,7 +126,7 @@
               url: "../include/kontrol/kontrol_jabatan_pegawai.php",
              data: 'crud=update&id_jabatan='+id_jabatan+
                     '&id_pegawai=' +id_pegawai+
-                    '&id_toko=' +id_toko+
+                    '&id_unit_kerja=' +id_unit_kerja+
                     '&id_bagian='+id_bagian+
                     '&jabatan='+jabatan+
                     '&status='+status+

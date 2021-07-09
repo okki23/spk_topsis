@@ -93,6 +93,15 @@ $hasil_pegawai=mysqli_query($db_link,$sql_pegawai);
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                        <label class="control-label col-sm-5" for="tgl_penilaian">Rekomendasi :</label>
+                        <div class="col-sm-6">
+                        <div class="input-group date">
+                            <textarea class="form-control" name="rekomendasi" id="rekomendasi">  <?php echo $tampil_tgl['rekomendasi']; ?>"  </textarea>
+                           
+                        </div>
+                        </div>
+                    </div>
                    </form>   
                 </div>
 			<hr style="height:1px; border:none;margin:0; color:#000; background-color:#428bca;">

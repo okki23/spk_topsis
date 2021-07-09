@@ -36,6 +36,8 @@
     <!--DatePicker -->
     <link href="../vendor/bootstrap/css/bootstrap-datetimepicker-standalone.css" rel="stylesheet">
     <link href="../vendor/bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+    <link href="http://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -106,7 +108,7 @@
                         if($hak_akses==0 || $hak_akses==1 || $hak_akses==2 || $hak_akses==3 || $hak_akses==4){
                             echo '  
                              <li>
-                                 <a href="index.php?navigasi=bagian&crud=view"><i class="fa fa-table fa-fw"></i> Data Pendukung</a>
+                                 <a href="index.php?navigasi=pendukung&crud=view"><i class="fa fa-table fa-fw"></i> Data Pendukung</a>
                              </li>
                             ';
  
@@ -114,7 +116,7 @@
                         if($hak_akses==0 || $hak_akses==1 || $hak_akses==2 || $hak_akses==3 || $hak_akses==4){
                             echo '
                             <li>
-                                <a href="index.php?navigasi=toko&crud=view"><i class="fa fa-table fa-fw"></i> Toko</a>
+                                <a href="index.php?navigasi=unit_kerja&crud=view"><i class="fa fa-table fa-fw"></i> Unit Kerja</a>
                             </li>
                             ';
 
@@ -231,7 +233,8 @@
     <!-- /#wrapper -->
     <!-- jQuery -->
     <script src="../vendor/jquery/jquery.min.js"></script>
-
+    <script src="http://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    
     <!-- Bootstrap Core JavaScript -->
     <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="../vendor/bootstrap/js/print.min.js"></script>

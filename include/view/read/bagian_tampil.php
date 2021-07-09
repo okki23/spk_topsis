@@ -4,7 +4,7 @@
 	<h2 class="text-center">DAFTAR BAGIAN</h2> 
 	<div class="panel-group">
 		<div class="panel panel-default">
-			<table class="table table-bordered table-hover text-center panel panel-primary">
+			<table class="table table-bordered table-hover text-center panel panel-primary" id="example">
 				<thead class="panel-heading">
 					<tr>
 						<th class="text-center">ID Bagian</th>
@@ -62,6 +62,7 @@
 
 <script>
 	 $(document).ready(function () {
+		$('#example').DataTable();
         $("#tambah").click(function () {
            		window.location.replace("index.php?navigasi=bagian&crud=tambah");
           });

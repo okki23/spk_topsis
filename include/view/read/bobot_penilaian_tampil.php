@@ -1,14 +1,7 @@
 <div class="col-sm-15 col-sm-offset-2" style="display: inline-block;">  
 	<h2 class="text-center">DAFTAR BOBOT PENILAIAN</h2> 
 	<div class="panel-group">
-		<div class="panel panel-default" style="padding:10px">
-            <div class="col-sm-3 input-group pull-right">
-         <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-        <input type="text" class="form-control" id="nama" placeholder="Search">
-        <span class="input-group-btn">
-        <button id="showall" class="btn btn-danger pull-right"><i class="glyphicon glyphicon-align-justify"></i></button>
-        </span>
-        </div>
+		 
         <br/><br/>
     <?php   
 
@@ -21,7 +14,7 @@
     $hasil_bagian=mysqli_query($db_link,$sql_bagian);
     $total_bagian=mysqli_num_rows($hasil_bagian);
 
-        echo '<table class="table table-bordered table-hover text-center panel panel-primary">
+        echo '<table class="table table-bordered table-hover text-center panel panel-primary" id="example">
                     
                 <thead class="panel-heading">
                 <tr>
@@ -144,7 +137,7 @@
     $hasil_bagian=mysqli_query($db_link,$sql_bagian);
     $total_bagian=mysqli_num_rows($hasil_bagian);
 
-        echo '<table class="table table-bordered table-hover text-center panel panel-primary">
+        echo '<table class="table table-bordered table-hover text-center panel panel-primary" id="examplex">
                     
                 <thead class="panel-heading">
                 <tr>
@@ -235,7 +228,8 @@
 
 <script>
 	 $(document).ready(function () {
-
+        $('#example').DataTable();
+        $('#examplex').DataTable();
         $("#tambah").click(function () {
            		window.location.replace("index.php?navigasi=bobot_penilaian&crud=tambah");
           });

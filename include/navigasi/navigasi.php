@@ -18,18 +18,18 @@ if(isset($_GET['navigasi'])){
         }
       }
 
-      if($_GET['navigasi']=='toko'){
+      if($_GET['navigasi']=='unit_kerja'){
         if ($_GET['crud']=='view'){
-          include_once "../include/view/read/toko_tampil.php";
+          include_once "../include/view/read/unit_kerja_tampil.php";
         }
         if($_GET['crud']=='edit'){
-          include_once "../include/view/edit/toko_edit.php";
+          include_once "../include/view/edit/unit_kerja_edit.php";
         }
           if($_GET['crud']=='hapus'){
-          include_once "../include/kontrol/kontrol_toko.php";
+          include_once "../include/kontrol/kontrol_unit_kerja.php";
         }
          if($_GET['crud']=='tambah'){
-          include_once "../include/view/create/toko.php";
+          include_once "../include/view/create/unit_kerja.php";
         }
       }
 
@@ -134,18 +134,33 @@ if(isset($_GET['navigasi'])){
         }
       }
 	  
-	  	  if($_GET['navigasi']=='user'){
+	  	if($_GET['navigasi']=='user'){
         if ($_GET['crud']=='view'){
           include_once "../include/view/read/user_tampil.php";
         }
-       if($_GET['crud']=='edit'){
+        if($_GET['crud']=='edit'){
           include_once "../include/view/edit/user_edit.php";
         }
-          if($_GET['crud']=='hapus'){
+        if($_GET['crud']=='hapus'){
           include_once "../include/kontrol/user_hapus.php";
         }
-         if($_GET['crud']=='tambah'){
+        if($_GET['crud']=='tambah'){
           include_once "../include/view/create/user.php";
+        }
+      }
+
+      if($_GET['navigasi']=='pendukung'){
+        if ($_GET['crud']=='view'){
+          include_once "../include/view/read/pendukung_tampil.php";
+        }
+        if($_GET['crud']=='edit'){
+          include_once "../include/view/edit/pendukung_edit.php";
+        }
+        if($_GET['crud']=='hapus'){
+          include_once "../include/kontrol/pendukung_hapus.php";
+        }
+        if($_GET['crud']=='tambah'){
+          include_once "../include/view/create/pendukung.php";
         }
       }
 	  

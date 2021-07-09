@@ -2,7 +2,7 @@
 	<h2 class="text-center">DAFTAR PEGAWAI</h2> 
 	<div class="panel-group">
 		<div class="panel panel-default">
-			<table class="table table-bordered table-hover text-center panel panel-primary">
+			<table class="table table-bordered table-hover text-center panel panel-primary" id="example">
 				<thead class="panel-heading">
 					<tr>
 						<th class="text-center">NO</th>
@@ -21,13 +21,13 @@
 							FROM pegawai a
 							LEFT JOIN jabatan_pegawai bb on a.no_pegawai=bb.id_pegawai
 							LEFT JOIN user b ON a.no_pegawai=b.id_pegawai
-							WHERE  bb.id_toko=
+							WHERE  bb.id_unit_kerja=
 							CASE WHEN $hak_akses=3 THEN
-							(SELECT distinct id_toko FROM jabatan_pegawai a 
+							(SELECT distinct id_unit_kerja FROM jabatan_pegawai a 
 							INNER JOIN pegawai b ON a.id_pegawai=b.no_pegawai
 							INNER JOIN user c ON b.no_pegawai=c.id_pegawai
 							WHERE c.user_name='$username')  
-							ELSE bb.id_toko END
+							ELSE bb.id_unit_kerja END
 							AND bb.id_bagian=
 							CASE WHEN $hak_akses=3 THEN(SELECT distinct id_bagian FROM jabatan_pegawai a 
 							INNER JOIN pegawai b ON a.id_pegawai=b.no_pegawai
@@ -92,6 +92,7 @@
 
 <script>
 	 $(document).ready(function () {
+		$('#example').DataTable();
         $("#tambah").click(function () {
            		window.location.replace("index.php?navigasi=pegawai&crud=tambah");
           });
