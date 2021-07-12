@@ -3,14 +3,7 @@
 	<div class="panel-group" >
 		<div class="panel panel-default" style="padding:10px" >
             <br/>
-              <div class="col-sm-3 input-group pull-right">
-         <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-        <input type="text" class="form-control" id="nama" placeholder="Search">
-        <span class="input-group-btn">
-        <button id="showall" class="btn btn-danger pull-right"><i class="glyphicon glyphicon-align-justify"></i></button>
-        </span>
-        </div>
-        <br/><br/>
+              
 <?php   
 
 $sql_kriteria="SELECT id_kriteria,nama_kriteria FROM kriteria ORDER BY id_kriteria";
@@ -65,7 +58,7 @@ $hasil_penilaian=mysqli_query($db_link,$sql_penilaian);
         while ($data_penilaian=mysqli_fetch_assoc($hasil_penilaian)) {
             echo "<tr  class='tablerow'>";
             echo "  
-                <td>s</td>
+                <td>{$s}</td>
                 <td>{$data_penilaian['nama']}</td>
                 <td>{$data_penilaian['nama_unit_kerja']}</td>";
                 $sql_jabatan="SELECT B.jabatan,C.bagian FROM penilaian A
@@ -119,8 +112,8 @@ $hasil_penilaian=mysqli_query($db_link,$sql_penilaian);
                 <td>";
                  if($hak_akses==0 || $hak_akses==2 || $hak_akses==3 ){
 
-                    echo "<a class='btn btn-primary ubah' ref='".$data_penilaian['id_jabatan']."' req='".$data_penilaian['id_nilai']."'>Ubah</a>&nbsp;
-                    <a class='btn btn-danger hapus' req='".$data_penilaian['id_nilai']."'>Hapus</a>";
+                    echo "<a class='btn btn-primary ubah' onclick='Update();' ref='".$data_penilaian['id_jabatan']."' req='".$data_penilaian['id_nilai']."'>Ubah</a>&nbsp;
+                    <a class='btn btn-danger hapus' onclick='Hapus();'  req='".$data_penilaian['id_nilai']."'>Hapus</a>";
                 }
                     
                 echo "</td>";
@@ -153,21 +146,16 @@ $hasil_penilaian=mysqli_query($db_link,$sql_penilaian);
 <script src="../vendor/jquery/jquery.min.js"></script>
 
 <script>
-	 $(document).ready(function () {
-        $('#example').DataTable();
-        $("#tambah").click(function () {
-           		window.location.replace("index.php?navigasi=penilaian&crud=tambah");
-          });
-        $('.ubah').click(function() {
-				var id_jabatan=$(this).attr('ref');
-                var id_nilai=$(this).attr('req');
-			 window.location.replace("index.php?navigasi=penilaian&crud=edit&id_jabatan="+id_jabatan+"&id_nilai="+id_nilai);
-		});
 
-		$('.hapus').click(function() {
-    		var id_nilai=$(this).attr('req');
-		
-			 if (confirm('Yakin menghapus Penilaian Pegawai ????')) {
+function Update(){ 
+    var id_jabatan = $('.ubah').attr('ref');
+    var id_nilai = $('.ubah').attr('req');
+	window.location.replace("index.php?navigasi=penilaian&crud=edit&id_jabatan="+id_jabatan+"&id_nilai="+id_nilai);
+}
+
+function Hapus(){ 
+    var id_nilai=$('.hapus').attr('req');
+    if (confirm('Yakin menghapus Penilaian Pegawai ????')) {
 					$.ajax({
 					type: "POST",
 					url: "../include/kontrol/kontrol_penilaian.php",
@@ -196,8 +184,52 @@ $hasil_penilaian=mysqli_query($db_link,$sql_penilaian);
 					}
 					});
 			 }
+}
+	 $(document).ready(function () {
+        $('#example').DataTable();
+        $("#tambah").click(function () {
+           		window.location.replace("index.php?navigasi=penilaian&crud=tambah");
+          });
+        // $('.ubah').click(function() {
+		// 		var id_jabatan=$(this).attr('ref');
+        //         var id_nilai=$(this).attr('req');
+		// 	 window.location.replace("index.php?navigasi=penilaian&crud=edit&id_jabatan="+id_jabatan+"&id_nilai="+id_nilai);
+		// });
+
+		// $('.hapus').click(function() {
+    	// 	var id_nilai=$(this).attr('req');
+		
+		// 	 if (confirm('Yakin menghapus Penilaian Pegawai ????')) {
+		// 			$.ajax({
+		// 			type: "POST",
+		// 			url: "../include/kontrol/kontrol_penilaian.php",
+		// 			data: 'crud=hapus&id_nilai='+id_nilai,
+		// 			success: function (respons) {
+						
+		// 				console.log(respons);
+		// 				if (respons=='berhasil'){
+		// 					$('#pesan_berhasil').text("Penilaian Pegawai Berhasil Dihapus");
+		// 						$("#hasil").show();
+		// 						setTimeout(function(){
+		// 							$("#hasil").hide();
+		// 							window.location.reload(1);
+		// 						}, 2000);
+		// 				}
+
+		// 				else {
+		// 						$('#pesan_gagal').text("Penilaian Pegawai Gagal Dihapus");
+		// 						$("#gagal").show();
+		// 						setTimeout(function(){
+		// 							$("#gagal").hide(); 
+		// 							window.location.reload(1);
+		// 						}, 2000);
+							
+		// 				}
+		// 			}
+		// 			});
+		// 	 }
 			
-		});
+		// });
 
     var $rows = $('tbody tr');
      $rows.show().filter(function() {
