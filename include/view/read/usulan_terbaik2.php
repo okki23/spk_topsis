@@ -2,7 +2,7 @@
     include_once "../../../koneksi.php";
 	$start 			=$_POST['start'];
 	$end 			=$_POST['end'];
-    $unit_kerja		=$_POST['unit_kerja'];
+    $id_toko		=$_POST['id_toko'];
     $jabatan		=$_POST['jabatan'];
     $id_bagian		=$_POST['id_bagian'];
     $jum_terbaik	=$_POST['jum_terbaik'];
@@ -15,7 +15,7 @@
 		,no_pegawai varchar(8)
 		,nama varchar(50)
         ,nilai decimal(10,8)
-        ,nama_unit_kerja varchar(255)
+        ,toko varchar(255)
         ,jabatan varchar(12)
         ,bagian varchar(255)
         ,tgl_penilaian date);");
@@ -32,27 +32,23 @@
     while($data_kriteria=mysqli_fetch_assoc($kriteria)){
         //per kriteria
         //masih seluruh pegawai belum ada filter
-        $sqlfornilai="SELECT DISTINCT C.no_pegawai,C.nama,BB.nilai,DD.akumulasi,E.nama_unit_kerja,B.jabatan,F.bagian,A.tgl_penilaian FROM penilaian A
+        $sqlfornilai="SELECT DISTINCT C.no_pegawai,C.nama,BB.nilai,DD.akumulasi,E.nama_toko,B.jabatan,F.bagian,A.tgl_penilaian FROM penilaian A
                     INNER JOIN detail_penilaian BB ON A.id_nilai=BB.id_nilai
                       INNER JOIN jabatan_pegawai B ON A.id_jabatan=B.id_jabatan
                       INNER JOIN pegawai C ON B.id_pegawai=C.no_pegawai
                        INNER JOIN detail_bobot DD ON BB.id_detailbobot=DD.id_detailbobot
                       INNER JOIN bobot_penilaian D ON DD.id_bobot=D.id_bobot AND B.jabatan=D.jabatan
-                      INNER JOIN unit_kerja E ON B.id_unit_kerja=E.id_unit_kerja
+                      INNER JOIN toko E ON B.id_toko=E.id_toko
                       INNER JOIN bagian F ON B.id_bagian=F.id_bagian
                       WHERE DD.id_kriteria='".$data_kriteria['id_kriteria']."'
-                      AND E.id_unit_kerja=CASE WHEN ".$unit_kerja."=0 THEN E.id_unit_kerja ELSE ".$unit_kerja." END
+                      AND E.id_toko=CASE WHEN ".$id_toko."=0 THEN E.id_toko ELSE ".$id_toko." END
                       AND B.jabatan=CASE WHEN '".$jabatan."'='none'THEN B.jabatan ELSE '".$jabatan."' END
                       AND F.id_bagian=CASE WHEN '".$id_bagian."'='none' THEN F.id_bagian ELSE '".$id_bagian."' END
                       AND date_format(A.tgl_penilaian,'%m/%Y')>='$start' AND date_format(A.tgl_penilaian,'%m/%Y')<='$end'
                       AND D.status=1 AND A.status=1
                       ORDER BY C.no_pegawai;
                       "; 
-                    //   echo $sqlfornilai;
-                    //   die();
     $nilai_krit=mysqli_query($db_link,$sqlfornilai); 
-      
-   
     echo mysqli_error($db_link);                                 
     $nilai_krit2=mysqli_query($db_link,$sqlfornilai);
          if(!$nilai_krit){
@@ -105,7 +101,7 @@
             }
             $nama_pegawai[$e]=$data_nilai['nama'];
             $no_pegawai[$e]=$data_nilai['no_pegawai'];
-            $unit_kerja[$e]=$data_nilai['nama_unit_kerja'];
+            $toko[$e]=$data_nilai['nama_toko'];
             $bag[$e]=$data_nilai['bagian'];
             $jab[$e]=$data_nilai['jabatan'];
             $peri[$e]=$data_nilai['tgl_penilaian'];
@@ -140,14 +136,11 @@
         //nilai preferensi alternatif
         //echo $d_minus[$zz].'/'.$d_minus[$zz].'+'.$d_plus[$zz].'<br>';
         $v[$zz]=$d_minus[$zz]/($d_minus[$zz]+$d_plus[$zz]);
-        $queryfinish=mysqli_query($db_link,"INSERT INTO rangking (no_pegawai,nama,nilai,unit_kerja,jabatan,bagian,tgl_penilaian) 
-        VALUES ('".$no_pegawai[$zz]."','".$nama_pegawai[$zz]."',".$v[$zz].",'".$unit_kerja[$zz]."','".$jab[$zz]."','".$bag[$zz]."','".$peri[$zz]."')");
- 
+        $queryfinish=mysqli_query($db_link,"INSERT INTO rangking (no_pegawai,nama,nilai,toko,jabatan,bagian,tgl_penilaian) 
+        VALUES ('".$no_pegawai[$zz]."','".$nama_pegawai[$zz]."',".$v[$zz].",'".$toko[$zz]."','".$jab[$zz]."','".$bag[$zz]."','".$peri[$zz]."')");
     }
-   
-    //munculkan unit_kerja
-$sql_rangking="SELECT no_pegawai,nama,nilai,nama_unit_kerja,jabatan,bagian,tgl_penilaian FROM rangking ORDER BY nilai DESC limit ".$jum_terbaik." ";
- 
+    //munculkan toko
+$sql_rangking="SELECT no_pegawai,nama,nilai,toko,jabatan,bagian,tgl_penilaian FROM rangking ORDER BY nilai DESC limit ".$jum_terbaik." ";
 $hasil_rangking=mysqli_query($db_link,$sql_rangking);
 echo '<h2 class="text-center">USULAN PEGAWAI TERBAIK</h2>';
         echo '<table class="table table-bordered table-hover text-center panel panel-primary" >
@@ -168,7 +161,7 @@ echo '<h2 class="text-center">USULAN PEGAWAI TERBAIK</h2>';
         $s=1;
         $no_peg=array();
         $nama_peg=array();
-        $unit_kerja_kerja=array();
+        $toko_kerja=array();
         $nilai_kerja=array();
         $bagian=array();
         $jabatan_peg=array();
@@ -180,7 +173,7 @@ echo '<h2 class="text-center">USULAN PEGAWAI TERBAIK</h2>';
                 <td>".$s."</td>
                  <td>{$data_rangking['no_pegawai']}</td>
                 <td>{$data_rangking['nama']}</td>
-                <td>{$data_rangking['unit_kerja']}</td>
+                <td>{$data_rangking['toko']}</td>
                 <td>".$data_rangking['nilai']."</td>
                 <td>{$data_rangking['bagian']}</td>
                 <td>{$data_rangking['jabatan']}</td>
@@ -188,7 +181,7 @@ echo '<h2 class="text-center">USULAN PEGAWAI TERBAIK</h2>';
             echo "</tr>";
             echo "<input type='hidden' name='no_peg$s' value='".$data_rangking['no_pegawai']."'>";
             echo "<input type='hidden' name='nama_peg$s' value='".$data_rangking['nama']."'>";
-            echo "<input type='hidden' name='unit_kerja_kerja$s' value='".$data_rangking['unit_kerja']."'>";
+            echo "<input type='hidden' name='toko_kerja$s' value='".$data_rangking['toko']."'>";
             echo "<input type='hidden' name='nilai_kerja$s' value='".$data_rangking['nilai']."'>";
             echo "<input type='hidden' name='bagian$s' value='".$data_rangking['bagian']."'>";
             echo "<input type='hidden' name='jabatan_peg$s' value='".$data_rangking['jabatan']."'>";

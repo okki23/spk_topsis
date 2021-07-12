@@ -7,7 +7,7 @@ $get_user_cek=mysqli_query ($db_link,"SELECT A.id_unit_kerja,A.id_bagian,B.no_pe
                 THEN '".$username."' ELSE c.user_name END ");
 $get_unit_kerja_user=mysqli_fetch_assoc($get_user_cek);
    
-    $sql_pegawai="SELECT B.id_jabatan,A.nama,D.bagian,C.nama_unit_kerja FROM pegawai A
+    $sql_pegawai="SELECT B.id_jabatan,A.nama,D.bagian,C.nama_unit_kerja,A.no_pegawai FROM pegawai A
                 INNER JOIN jabatan_pegawai B ON A.no_pegawai=B.id_pegawai 
                 INNER JOIN unit_kerja C ON B.id_unit_kerja=C.id_unit_kerja
                 INNER JOIN bagian D ON B.id_bagian=D.id_bagian
@@ -34,11 +34,11 @@ $b=0;
                     <div class="form-group">
                         <label class="control-label col-sm-5" for="jabatan">Nama Pegawai : </label>
                         <div class="col-sm-6">
-                            <select  class="form-control" name="jabatan" id="jabatan">  
+                            <select  class="form-control" name="jabatan" id="jabatan" >  
                                 <option>-</option>
                             <?php
                                 while ($pegawai_tampil=mysqli_fetch_assoc($hasil_pegawai)){
-                                    echo "<option value='".$pegawai_tampil['id_jabatan']."'>".$pegawai_tampil['nama']." - ".$pegawai_tampil['nama_unit_kerja']." - ".$pegawai_tampil['bagian']."</option>";
+                                    echo "<option value='".$pegawai_tampil['id_jabatan']."'>".$pegawai_tampil['no_pegawai']." - ".$pegawai_tampil['nama']." - ".$pegawai_tampil['nama_unit_kerja']." - ".$pegawai_tampil['bagian']."</option>";
                                 }
                             ?>
                         </select> 
@@ -60,6 +60,9 @@ $b=0;
                         </div>
                         </div>
                     </div>
+
+                    <div id="results"></div> 
+                     
                     <div class="form-group">
                         <label class="control-label col-sm-5" for="tgl_penilaian">Rekomendasi :</label>
                         <div class="col-sm-6">
@@ -84,10 +87,24 @@ $b=0;
 
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script>
- 
+ function CariPendukung(){
+        var data = $(this).val();
+        console.log(data);
+     }
  $(document).ready(function () {
+     
         $("#jabatan").click(function () {
             var jabatan= $(this).val();
+
+            //ajax get rekomendasi 
+            $.ajax({
+                    type: "POST",
+					url: "../include/kontrol/kontrol_penilaian_rek.php",  
+					data: 'id='+jabatan,
+					success: function (respons) {
+                        $("#results").html(respons);                    
+                    }
+            });
 
            	$.ajax({
 					type: "GET",

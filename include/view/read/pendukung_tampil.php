@@ -1,5 +1,5 @@
 <div class="col-sm-8 col-sm-offset-3">  
-	<h2 class="text-center">DAFTAR Pendukung</h2> 
+	<h2 class="text-center">DAFTAR PENDUKUNG</h2> 
 	<div class="panel-group">
 		<div class="panel panel-default">
 			<table class="table table-bordered table-hover text-center panel panel-primary" id="example">
@@ -13,37 +13,23 @@
 				</thead>
 				<tbody>
 					<?php /*php pembuka tabel atas*/
-							$sql = "select * from pendukung order by id";
+							$sql = "select a.*,b.nama from pendukung a 
+							left join pegawai b on b.no_pegawai = a.id_pegawai 
+							order by a.id";
 							$hasil = mysqli_query($db_link,$sql);
 							if (!$hasil){
 							die("Gagal Query Data ");}
 							
 							while ($data=mysqli_fetch_array($hasil)) {
 							echo "<tr>";
-                            echo "  <td>{$data['id_pegawai']}</td>
-									<td>{$data['pendukung_name']}</td>
-									<td>";
-									if($data['hak_akses']==0){
-										echo "Admin";
-									}
-									else if($data['hak_akses']==1){
-										echo "Manager";
-									}
-									else if($data['hak_akses']==2){
-										echo "HRD";
-									}
-									else if($data['hak_akses']==3){
-										echo "Koordinator";
-									}
-									else if($data['hak_akses']==4){
-										echo "Pegawai";
-									}
-									echo "</td>
+                            echo "  <td>{$data['nama']}</td>
+									<td>{$data['nama_kegiatan']}</td>
+									<td><a href='../upload/".$data['file_pendukung']."' target='_blank'> Buka File </a> </td> 
 									<td>
 										  <a class='btn btn-primary ubah' ref='".$data['id_pegawai']."'>Ubah</a>&nbsp;";
-									if ($data['hak_akses']<>0){
-										echo "<a class='btn btn-danger hapus' ref='".$data['id_pegawai']."' nama='".$data['pendukung_name']."'>Hapus</a>";
-									}
+								 
+										echo "<a class='btn btn-danger hapus' ref='".$data['id_pegawai']."' >Hapus</a>";
+								 
                                     echo "</td>";
 							echo "</tr>";
 						}
@@ -83,7 +69,7 @@
 					$.ajax({
 					type: "POST",
 					url: "../include/kontrol/kontrol_pendukung.php",
-					data: 'crud=hapus&id_pegawai='+id_pegawai+'&pendukungname='+pendukungname,
+					data: 'crud=hapus&id_pegawai='+id_pegawai,
 					success: function (respons) {
 						
 						console.log(respons);

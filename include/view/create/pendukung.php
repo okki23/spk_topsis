@@ -8,7 +8,7 @@ $pegawai=("SELECT A.no_pegawai,A.nama from pegawai A
 <div class="col-sm-6 col-sm-offset-4">  
 	<div class="panel-group">
 		<div class="panel panel-primary">
-            <div class="panel-heading"><h2 class="text-center">TAMBAH USER</h2></div>
+            <div class="panel-heading"><h2 class="text-center">TAMBAH PENDUKUNG</h2></div>
                 <div class="panel-body">
                     <form method="post" id="user_form" enctype="multipart/form-data">   
                     <input type="hidden" name="crud" id="crud" value="tambah">
@@ -35,8 +35,7 @@ $pegawai=("SELECT A.no_pegawai,A.nama from pegawai A
                       
                         <div class="form-group">
                             <!-- <label class="control-label col-sm-3">File :</label> -->
-                            <div class="col-sm-8">  
-                            
+                            <div class="col-sm-8">   
                             <h5> <b> Upload File </b></h5>
                             <input type="file" class="form-control" id="file" name="file"  require/>
                             </div>
@@ -49,7 +48,7 @@ $pegawai=("SELECT A.no_pegawai,A.nama from pegawai A
 			<div class="panel-footer">
 				<div class="text-center">	
 					<button type="sumbit" id="tambah" class="btn btn-success">SIMPAN</button>
-                    <button type="button" id="cancel" onclick="window.location ='index.php?navigasi=user&crud=view';" class="btn btn-danger">CANCEL</button>
+                    <button type="button" id="cancel" onclick="window.location ='index.php?navigasi=pendukung&crud=view';" class="btn btn-danger">CANCEL</button>
 				</div>
 			</div>
 		</div>
@@ -78,14 +77,14 @@ $pegawai=("SELECT A.no_pegawai,A.nama from pegawai A
                 processData:false,   
                 success:function(result){ 
                 if (result=='berhasil'){
-                         $('#pesan_berhasil').text("User Berhasil Ditambah");
+                         $('#pesan_berhasil').text("Pendukung Berhasil Ditambah");
                         $("#hasil").show();
                         $('#user_form')[0].reset();
                         setTimeout(function(){
                             $("#hasil").hide(); 
                         }, 2000);
                 }else {
-                        $('#pesan_gagal').text("User Gagal Ditambah");
+                        $('#pesan_gagal').text("Pendukung Gagal Ditambah");
                         $("#gagal").show();
                         $('#user_form')[0].reset();
                         setTimeout(function(){

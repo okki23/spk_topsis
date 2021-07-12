@@ -1,6 +1,6 @@
 <div class="col-sm-9 col-sm-offset-3">  
 <?php 
-$unit_kerja=mysqli_query($db_link,"SELECT id_unit_kerja,nama_unit_kerja FROM unit_kerja");
+$toko=mysqli_query($db_link,"SELECT id_toko,nama_toko FROM toko");
 $bag=mysqli_query($db_link,"SELECT id_bagian,bagian FROM bagian");  
 ?>
 
@@ -32,13 +32,13 @@ $bag=mysqli_query($db_link,"SELECT id_bagian,bagian FROM bagian");
                     </div>
                 </div>
              <div class="form-group">
-                <label class="control-label col-sm-3" for="unit_kerja">Unit Kerja : </label>
+                <label class="control-label col-sm-3" for="toko">Toko : </label>
                 <div class="col-sm-5">
-                    <select  class="form-control" name="unit_kerja">  
+                    <select  class="form-control" name="toko">  
                         <option value='0'>All</option>
                     <?php
-                        while ($data_unit_kerja=mysqli_fetch_assoc($unit_kerja)){
-                            echo "<option value='".$data_unit_kerja['id_unit_kerja']."'>".$data_unit_kerja['nama_unit_kerja']."</option>";
+                        while ($data_toko=mysqli_fetch_assoc($toko)){
+                            echo "<option value='".$data_toko['id_toko']."'>".$data_toko['nama_toko']."</option>";
                         }
                     ?>
                 </select> 
@@ -68,7 +68,7 @@ $bag=mysqli_query($db_link,"SELECT id_bagian,bagian FROM bagian");
                 </div>
            </div>
            <div class="form-group" id="id_group_jum_terbaik">
-                <label class="control-label col-sm-3" for="unit_kerja">Jumlah Terbaik : </label>
+                <label class="control-label col-sm-3" for="toko">Jumlah Terbaik : </label>
                 <div class="col-sm-5">
                    <input type="number" min="1" max="10" name='jumlah_terbaik' class="form-control">
                 </div>
@@ -110,14 +110,14 @@ $('#show').hide();
         $("#tampil").click(function () {
              var start= $('input[name=start]').val();
              var end= $('input[name=end]').val();
-            var unit_kerja= $('select[name=unit_kerja]').val();
+            var id_toko= $('select[name=toko]').val();
             var jabatan= $('select[name=jabatan]').val();
             var id_bagian= $('select[name=bagian]').val();
             var jum_terbaik= $('input[name=jumlah_terbaik]').val();
            	$.ajax({
 					type: "POST",
 					url: "../include/view/read/usulan_terbaik2.php",
-					data: 'start='+start+'&end='+end+'&unit_kerja='+unit_kerja+'&jabatan='+jabatan+'&id_bagian='+id_bagian+'&jum_terbaik='+jum_terbaik,
+					data: 'start='+start+'&end='+end+'&id_toko='+id_toko+'&jabatan='+jabatan+'&id_bagian='+id_bagian+'&jum_terbaik='+jum_terbaik,
 					success: function (respons) {
                         $('.point').html(respons);
                         $('#show').show();
@@ -129,14 +129,14 @@ $('#show').hide();
  $("#matrik").click(function () {
              var start= $('input[name=start]').val();
              var end= $('input[name=end]').val();
-            var unit_kerja= $('select[name=unit_kerja]').val();
+            var id_toko= $('select[name=toko]').val();
             var jabatan= $('select[name=jabatan]').val();
             var id_bagian= $('select[name=bagian]').val();
             var jum_terbaik= $('input[name=jumlah_terbaik]').val();
            	$.ajax({
 					type: "POST",
 					url: "../include/view/read/matrik1.php",
-					data: 'start='+start+'&end='+end+'&unit_kerja='+unit_kerja+'&jabatan='+jabatan+'&id_bagian='+id_bagian+'&jum_terbaik='+jum_terbaik,
+					data: 'start='+start+'&end='+end+'&id_toko='+id_toko+'&jabatan='+jabatan+'&id_bagian='+id_bagian+'&jum_terbaik='+jum_terbaik,
 					success: function (respons) {
                         $('.point').html(respons);
                         $('#show').show();
@@ -151,13 +151,13 @@ $('#show').hide();
             var count=1;
              var start= $('input[name=start]').val();
              var end= $('input[name=end]').val();
-            var id_unit_kerja= $('select[name=unit_kerja]').val();
+            var id_toko= $('select[name=toko]').val();
             var jabatan= $('select[name=jabatan]').val();
             var id_bagian= $('select[name=bagian]').val();
             var jum_terbaik= $('input[name=jumlah_terbaik]').val();
              var no_peg=[];
             var nama_peg=[];
-            var unit_kerja_kerja=[];
+            var toko_kerja=[];
             var nilai_kerja=[];
             var bagian=[];
             var jabatan_peg=[];
@@ -165,7 +165,7 @@ $('#show').hide();
 
              var no_pegstring='';
             var nama_pegstring='';
-            var unit_kerja_kerjastring='';
+            var toko_kerjastring='';
             var nilai_kerjastring='';
             var bagianstring='';
             var jabatan_pegstring='';
@@ -195,7 +195,7 @@ $('#show').hide();
         while (count<=penilaiancount){
             no_peg[count]=$('input[name=no_peg'+count+']').val();
             nama_peg[count]=$('input[name=nama_peg'+count+']').val();
-            unit_kerja_kerja[count]=$('input[name=unit_kerja_kerja'+count+']').val();
+            toko_kerja[count]=$('input[name=toko_kerja'+count+']').val();
             nilai_kerja[count]=$('input[name=nilai_kerja'+count+']').val();
             bagian[count]=$('input[name=bagian'+count+']').val();
             jabatan_peg[count]=$('input[name=jabatan_peg'+count+']').val();
@@ -203,7 +203,7 @@ $('#show').hide();
 
             no_pegstring=no_pegstring+'&no_peg'+count+'='+no_peg[count];
             nama_pegstring=nama_pegstring+'&nama_peg'+count+'='+nama_peg[count];
-            unit_kerjastring=unit_kerjastring+'&unit_kerja'+count+'='+unit_kerja[count];
+            toko_kerjastring=toko_kerjastring+'&toko_kerja'+count+'='+toko_kerja[count];
             nilai_kerjastring=nilai_kerjastring+'&nilai_kerja'+count+'='+nilai_kerja[count];
             bagianstring=bagianstring+'&bagian'+count+'='+bagian[count];
             jabatan_pegstring=jabatan_pegstring+'&jabatan_peg'+count+'='+jabatan_peg[count];
@@ -215,7 +215,7 @@ $('#show').hide();
 					type: "POST",
 					url: "../include/kontrol/kontrol_usulan.php",
 					data: 'crud=tambah&count='+penilaiancount+
-                   no_pegstring+nama_pegstring+unit_kerjastring+nilai_kerjastring+bagianstring+jabatan_pegstring+tgl_rangkingstring,
+                   no_pegstring+nama_pegstring+toko_kerjastring+nilai_kerjastring+bagianstring+jabatan_pegstring+tgl_rangkingstring,
 					success: function (respons) {
                          if (respons=='berhasil'){
                          $('#pesan_berhasil').text("Usulan Pegawai Berhasil Ditambah");
