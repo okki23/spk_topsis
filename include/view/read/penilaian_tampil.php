@@ -17,6 +17,7 @@ $sql_kriteria="SELECT id_kriteria,nama_kriteria FROM kriteria ORDER BY id_kriter
 $hasil_kriteria=mysqli_query($db_link,$sql_kriteria);
 $total_kriteria=mysqli_num_rows($hasil_kriteria);
 
+ 
 $get_user_cek=mysqli_query ($db_link,"SELECT A.id_unit_kerja FROM jabatan_pegawai A
                             INNER JOIN pegawai B ON A.id_pegawai=B.no_pegawai
                             INNER JOIN user c ON B.no_pegawai=c.id_pegawai

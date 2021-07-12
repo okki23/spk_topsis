@@ -34,7 +34,7 @@ $b=0;
                     <div class="form-group">
                         <label class="control-label col-sm-5" for="jabatan">Nama Pegawai : </label>
                         <div class="col-sm-6">
-                            <select  class="form-control" name="jabatan" id="jabatan" >  
+                            <select  class="form-control" name="jabatan" id="jabatan">  
                                 <option>-</option>
                             <?php
                                 while ($pegawai_tampil=mysqli_fetch_assoc($hasil_pegawai)){
@@ -86,37 +86,47 @@ $b=0;
 </div>
 
 <script src="../vendor/jquery/jquery.min.js"></script>
-<script>
- function CariPendukung(){
-        var data = $(this).val();
-        console.log(data);
-     }
- $(document).ready(function () {
-     
-        $("#jabatan").click(function () {
-            var jabatan= $(this).val();
-
-            //ajax get rekomendasi 
-            $.ajax({
-                    type: "POST",
-					url: "../include/kontrol/kontrol_penilaian_rek.php",  
-					data: 'id='+jabatan,
-					success: function (respons) {
-                        $("#results").html(respons);                    
-                    }
-            });
-
-           	$.ajax({
+<script> 
+    function displayVals() {
+    var jabatan = $("#jabatan").val();  
+               	$.ajax({
 					type: "GET",
-					url: "../include/view/create/penilaian2.php",
-
+					url: "../include/view/create/penilaian2.php", 
 					data: 'id_jabatan='+jabatan,
 					success: function (respons) {
-                        $('#kriteria').html(respons);
-                        
+                        $('#kriteria').html(respons); 
                     }
-               });
-        });
+                }); 
+ 
+                $.ajax({
+					type: "GET",
+					url: "../include/kontrol/kontrol_penilaian_rek.php",
+					data: 'id_jabatan='+jabatan,
+					success: function (response) { 
+                        console.log(response);
+                    }
+                }); 
+    }
+    $("#jabatan").change(displayVals);
+
+
+ $(document).ready(function () {
+     
+        // $("#jabatan").click(function () {
+        //     var jabatan= $(this).val();
+
+           
+        //    	$.ajax({
+		// 			type: "GET",
+		// 			url: "../include/view/create/penilaian2.php",
+
+		// 			data: 'id_jabatan='+jabatan,
+		// 			success: function (respons) {
+        //                 $('#kriteria').html(respons);
+                        
+        //             }
+        //        });
+        // });
           $("#tambah").click(function () {
             
             var jabatan= $('select[name=jabatan]').val();

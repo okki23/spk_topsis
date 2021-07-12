@@ -1,4 +1,6 @@
  <?php
+ error_reporting(0);
+    $id_nilai=$_GET['id_nilai'];
 $get_user_cek=mysqli_query ($db_link,"SELECT A.id_unit_kerja FROM jabatan_pegawai A
                             INNER JOIN pegawai B ON A.id_pegawai=B.no_pegawai
                             INNER JOIN user c ON B.no_pegawai=c.id_pegawai
@@ -6,7 +8,11 @@ $get_user_cek=mysqli_query ($db_link,"SELECT A.id_unit_kerja FROM jabatan_pegawa
                 THEN '".$username."' ELSE c.user_name END ");
 $get_unit_kerja_user=mysqli_fetch_assoc($get_user_cek);
 
-   $id_nilai=$_GET['id_nilai'];
+$sqlrekomendasi = "SELECT * from penilaian where id_nilai = '".$id_nilai."' ";
+$exrek = mysqli_query($db_link,$sqlrekomendasi);
+$getrek = mysqli_fetch_assoc($exrek);
+ 
+
    $id_jabatan=$_GET['id_jabatan'];
     $kriteria=("SELECT C.id_bobot,CC.id_detailbobot,D.nama_kriteria FROM bagian A
                 INNER JOIN jabatan_pegawai B ON A.id_bagian=B.id_bagian
@@ -28,6 +34,28 @@ $hasil_pegawai=mysqli_query($db_link,$sql_pegawai);
   $pegawai_tampil=mysqli_fetch_assoc($hasil_pegawai);
   $sql_tgl=mysqli_query($db_link,"SELECT DISTINCT tgl_penilaian FROM penilaian WHERE id_jabatan=$id_jabatan");
   $tampil_tgl=mysqli_fetch_assoc($sql_tgl);
+
+  
+  $sqlrek = " select a.*,b.nama from pendukung a 
+  left join pegawai b on b.no_pegawai = a.id_pegawai
+ left join jabatan_pegawai c on c.id_pegawai = a.id_pegawai
+     where c.id_jabatan = '".$id_jabatan."' ";
+  $exrek = mysqli_query($db_link,$sqlrek);
+  $datarek = mysqli_fetch_assoc($exrek); 
+  
+  $res_nk = '';
+  $res_fk = '';
+  if($datarek['nama_kegiatan'] != NULL || $datarek['nama_kegiatan'] != ''){
+      $res_nk = $datarek['nama_kegiatan'];
+  }else{
+      $res_nk = ' - '; 
+  }
+
+  if($datarek['file_pendukung'] != NULL || $datarek['file_pendukung'] != ''){ 
+      $res_fk = '<a href="http://localhost/spk_topsis/upload/'.$datarek['file_pendukung'].'" target="_blank"> Download File </a>';
+  }else{
+      $res_fk = ' - ';
+  }
 ?>
 
 
@@ -93,11 +121,14 @@ $hasil_pegawai=mysqli_query($db_link,$sql_pegawai);
                                 </div>
                             </div>
                         </div>
+                        <?php 
+                        echo "<br> <div align='center'> <h3> <b> Nama Kegiatan : ".$res_nk." </b> </h3> <br> <h3> <b> File Pendukung : ".$res_fk." </b> </h3> </div> <br> &nbsp;";
+                        ?>
                         <div class="form-group">
                         <label class="control-label col-sm-5" for="tgl_penilaian">Rekomendasi :</label>
                         <div class="col-sm-6">
                         <div class="input-group date">
-                            <textarea class="form-control" name="rekomendasi" id="rekomendasi">  <?php echo $pegawai_tampil['rekomendasi']; ?>"  </textarea>
+                            <textarea class="form-control" name="rekomendasi" id="rekomendasi">  <?php echo $getrek['rekomendasi']; ?> </textarea>
                            
                         </div>
                         </div>

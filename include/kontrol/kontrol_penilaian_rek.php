@@ -1,11 +1,11 @@
 <?php 
 error_reporting(0);
 include_once "../../koneksi.php";
-$id = isset($_POST['id']);
+$id_jabatan = isset($_POST['id_jabatan']);
 $sql = "select a.*,b.nama,c.nama_kegiatan,c.file_pendukung from jabatan_pegawai a 
 left join pegawai b on b.no_pegawai = a.id_pegawai
 left join pendukung c on c.id_pegawai = a.id_pegawai
-where a.id_jabatan = '".$id."' ";
+where a.id_jabatan = '".$id_jabatan."' ";
 $ex = mysqli_query($db_link,$sql);
 $data = mysqli_fetch_assoc($ex);
 
