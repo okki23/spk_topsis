@@ -1,10 +1,10 @@
  <?php
-$get_user_cek=mysqli_query ($db_link,"SELECT A.id_toko FROM jabatan_pegawai A
+$get_user_cek=mysqli_query ($db_link,"SELECT A.id_unit_kerja FROM jabatan_pegawai A
                             INNER JOIN pegawai B ON A.id_pegawai=B.no_pegawai
                             INNER JOIN user c ON B.no_pegawai=c.id_pegawai
                             WHERE c.user_name=CASE WHEN $hak_akses=3 
                 THEN '".$username."' ELSE c.user_name END ");
-$get_toko_user=mysqli_fetch_assoc($get_user_cek);
+$get_unit_kerja_user=mysqli_fetch_assoc($get_user_cek);
 
    $id_nilai=$_GET['id_nilai'];
    $id_jabatan=$_GET['id_jabatan'];
@@ -17,12 +17,12 @@ $get_toko_user=mysqli_fetch_assoc($get_user_cek);
                 AND C.status=1");
     $kriteria_query = mysqli_query($db_link,$kriteria);
 
-    $sql_pegawai="SELECT DISTINCT C.id_nilai,B.id_jabatan,A.nama,C.tgl_penilaian FROM pegawai A
+    $sql_pegawai="SELECT DISTINCT C.id_nilai,B.id_jabatan,A.nama,C.tgl_penilaian,c.rekomendasi FROM pegawai A
                 INNER JOIN jabatan_pegawai B ON A.no_pegawai=B.id_pegawai
                 INNER JOIN penilaian C ON B.id_jabatan=C.id_jabatan 
                 INNER JOIN detail_penilaian D ON C.id_nilai=D.id_nilai
-                WHERE  C.id_jabatan=$id_jabatan AND B.id_toko=CASE WHEN $hak_akses=3 THEN '".$get_toko_user['id_toko']."'
-                ELSE B.id_toko END
+                WHERE  C.id_jabatan=$id_jabatan AND B.id_unit_kerja=CASE WHEN $hak_akses=3 THEN '".$get_unit_kerja_user['id_unit_kerja']."'
+                ELSE B.id_unit_kerja END
                 AND C.id_nilai=".$id_nilai."";
 $hasil_pegawai=mysqli_query($db_link,$sql_pegawai);      
   $pegawai_tampil=mysqli_fetch_assoc($hasil_pegawai);
@@ -97,7 +97,7 @@ $hasil_pegawai=mysqli_query($db_link,$sql_pegawai);
                         <label class="control-label col-sm-5" for="tgl_penilaian">Rekomendasi :</label>
                         <div class="col-sm-6">
                         <div class="input-group date">
-                            <textarea class="form-control" name="rekomendasi" id="rekomendasi">  <?php echo $tampil_tgl['rekomendasi']; ?>"  </textarea>
+                            <textarea class="form-control" name="rekomendasi" id="rekomendasi">  <?php echo $pegawai_tampil['rekomendasi']; ?>"  </textarea>
                            
                         </div>
                         </div>

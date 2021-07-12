@@ -1,22 +1,22 @@
  <?php
 
-$get_user_cek=mysqli_query ($db_link,"SELECT A.id_toko,A.id_bagian,B.no_pegawai FROM jabatan_pegawai A
+$get_user_cek=mysqli_query ($db_link,"SELECT A.id_unit_kerja,A.id_bagian,B.no_pegawai FROM jabatan_pegawai A
                             INNER JOIN pegawai B ON A.id_pegawai=B.no_pegawai
                             INNER JOIN user c ON B.no_pegawai=c.id_pegawai
                             WHERE c.user_name=CASE WHEN $hak_akses=3 
                 THEN '".$username."' ELSE c.user_name END ");
-$get_toko_user=mysqli_fetch_assoc($get_user_cek);
+$get_unit_kerja_user=mysqli_fetch_assoc($get_user_cek);
    
-    $sql_pegawai="SELECT B.id_jabatan,A.nama,D.bagian,C.nama_toko FROM pegawai A
+    $sql_pegawai="SELECT B.id_jabatan,A.nama,D.bagian,C.nama_unit_kerja FROM pegawai A
                 INNER JOIN jabatan_pegawai B ON A.no_pegawai=B.id_pegawai 
-                INNER JOIN toko C ON B.id_toko=C.id_toko
+                INNER JOIN unit_kerja C ON B.id_unit_kerja=C.id_unit_kerja
                 INNER JOIN bagian D ON B.id_bagian=D.id_bagian
-                WHERE B.id_toko=CASE WHEN $hak_akses=3 THEN '".$get_toko_user['id_toko']."'
-                ELSE B.id_toko END AND
-                B.id_bagian=CASE WHEN $hak_akses=3 THEN '".$get_toko_user['id_bagian']."'
+                WHERE B.id_unit_kerja=CASE WHEN $hak_akses=3 THEN '".$get_unit_kerja_user['id_unit_kerja']."'
+                ELSE B.id_unit_kerja END AND
+                B.id_bagian=CASE WHEN $hak_akses=3 THEN '".$get_unit_kerja_user['id_bagian']."'
                 ELSE B.id_bagian END
                 AND
-                1=CASE WHEN $hak_akses<>3 THEN 1 WHEN $hak_akses=3 AND A.no_pegawai='".$get_toko_user['no_pegawai']."'
+                1=CASE WHEN $hak_akses<>3 THEN 1 WHEN $hak_akses=3 AND A.no_pegawai='".$get_unit_kerja_user['no_pegawai']."'
                 THEN 0 ELSE 1 END
                 ORDER BY A.no_pegawai";
 $hasil_pegawai=mysqli_query($db_link,$sql_pegawai);
@@ -38,7 +38,7 @@ $b=0;
                                 <option>-</option>
                             <?php
                                 while ($pegawai_tampil=mysqli_fetch_assoc($hasil_pegawai)){
-                                    echo "<option value='".$pegawai_tampil['id_jabatan']."'>".$pegawai_tampil['nama']." - ".$pegawai_tampil['nama_toko']." - ".$pegawai_tampil['bagian']."</option>";
+                                    echo "<option value='".$pegawai_tampil['id_jabatan']."'>".$pegawai_tampil['nama']." - ".$pegawai_tampil['nama_unit_kerja']." - ".$pegawai_tampil['bagian']."</option>";
                                 }
                             ?>
                         </select> 

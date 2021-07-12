@@ -40,7 +40,7 @@ $hasil_penilaian=mysqli_query($db_link,$sql_penilaian);
                 <tr>
                     <th class="text-center" rowspan="2" style="vertical-align: middle;">NO</th>
                     <th class="text-center" rowspan="2" style="vertical-align: middle;">NAMA PEGAWAI</th>
-                    <th class="text-center" rowspan="2" style="vertical-align: middle;" width="90">unit_kerja</th>
+                    <th class="text-center" rowspan="2" style="vertical-align: middle;" width="90">Unit Kerja</th>
                     <th class="text-center" colspan="'.$total_kriteria.'">KRITERIA</th>
                     <th class="text-center" rowspan="2" style="vertical-align: middle;">BAGIAN</th>
                     <th class="text-center" rowspan="2" style="vertical-align: middle;">JABATAN</th>
@@ -64,7 +64,7 @@ $hasil_penilaian=mysqli_query($db_link,$sql_penilaian);
         while ($data_penilaian=mysqli_fetch_assoc($hasil_penilaian)) {
             echo "<tr  class='tablerow'>";
             echo "  
-                <td></td>
+                <td>s</td>
                 <td>{$data_penilaian['nama']}</td>
                 <td>{$data_penilaian['nama_unit_kerja']}</td>";
                 $sql_jabatan="SELECT B.jabatan,C.bagian FROM penilaian A
@@ -153,7 +153,7 @@ $hasil_penilaian=mysqli_query($db_link,$sql_penilaian);
 
 <script>
 	 $(document).ready(function () {
-
+        $('#example').DataTable();
         $("#tambah").click(function () {
            		window.location.replace("index.php?navigasi=penilaian&crud=tambah");
           });

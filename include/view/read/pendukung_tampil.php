@@ -1,19 +1,19 @@
 <div class="col-sm-8 col-sm-offset-3">  
-	<h2 class="text-center">DAFTAR USER</h2> 
+	<h2 class="text-center">DAFTAR Pendukung</h2> 
 	<div class="panel-group">
 		<div class="panel panel-default">
-			<table class="table table-bordered table-hover text-center panel panel-primary">
+			<table class="table table-bordered table-hover text-center panel panel-primary" id="example">
 				<thead class="panel-heading">
 					<tr>
 						<th class="text-center">No Pegawai</th>
-						<th class="text-center">Username</th>
-						<th class="text-center">Hak Akses</th>
+						<th class="text-center">Kegiatan</th>
+						<th class="text-center">File</th>
 						<th class="text-center">Aksi</th>
 					</tr>
 				</thead>
 				<tbody>
 					<?php /*php pembuka tabel atas*/
-							$sql = "select * from user order by id_pegawai";
+							$sql = "select * from pendukung order by id";
 							$hasil = mysqli_query($db_link,$sql);
 							if (!$hasil){
 							die("Gagal Query Data ");}
@@ -21,7 +21,7 @@
 							while ($data=mysqli_fetch_array($hasil)) {
 							echo "<tr>";
                             echo "  <td>{$data['id_pegawai']}</td>
-									<td>{$data['user_name']}</td>
+									<td>{$data['pendukung_name']}</td>
 									<td>";
 									if($data['hak_akses']==0){
 										echo "Admin";
@@ -42,7 +42,7 @@
 									<td>
 										  <a class='btn btn-primary ubah' ref='".$data['id_pegawai']."'>Ubah</a>&nbsp;";
 									if ($data['hak_akses']<>0){
-										echo "<a class='btn btn-danger hapus' ref='".$data['id_pegawai']."' nama='".$data['user_name']."'>Hapus</a>";
+										echo "<a class='btn btn-danger hapus' ref='".$data['id_pegawai']."' nama='".$data['pendukung_name']."'>Hapus</a>";
 									}
                                     echo "</td>";
 							echo "</tr>";
@@ -54,7 +54,7 @@
 			<div class="panel-heading">
 					<div class="row">
 						<div class="col-sm-12">
-							<button type="button" id="tambah" class="btn btn-success">TAMBAH USER</button>
+							<button type="button" id="tambah" class="btn btn-success">TAMBAH pendukung</button>
 						</div>
 					</div>
 			</div>
@@ -66,28 +66,29 @@
 
 <script>
 	 $(document).ready(function () {
+		$('#example').DataTable();
         $("#tambah").click(function () {
-           		window.location.replace("index.php?navigasi=user&crud=tambah");
+           		window.location.replace("index.php?navigasi=pendukung&crud=tambah");
           });
 		
 		$('.ubah').click(function() {
 				var id_pegawai=$(this).attr('ref');
-			 window.location.replace("index.php?navigasi=user&crud=edit&id_pegawai="+id_pegawai);
+			 window.location.replace("index.php?navigasi=pendukung&crud=edit&id_pegawai="+id_pegawai);
 		});
 
 		$('.hapus').click(function() {
     		var id_pegawai =$(this).attr('ref');
-			var username=$(this).attr('nama');
-			 if (confirm('Yakin menghapus User '+id_pegawai+'????')) {
+			var pendukungname=$(this).attr('nama');
+			 if (confirm('Yakin menghapus pendukung '+id_pegawai+'????')) {
 					$.ajax({
 					type: "POST",
-					url: "../include/kontrol/kontrol_user.php",
-					data: 'crud=hapus&id_pegawai='+id_pegawai+'&username='+username,
+					url: "../include/kontrol/kontrol_pendukung.php",
+					data: 'crud=hapus&id_pegawai='+id_pegawai+'&pendukungname='+pendukungname,
 					success: function (respons) {
 						
 						console.log(respons);
 						if (respons=='berhasil'){
-							$('#pesan_berhasil').text("User Berhasil Dihapus");
+							$('#pesan_berhasil').text("pendukung Berhasil Dihapus");
 								$("#hasil").show();
 								setTimeout(function(){
 									$("#hasil").hide();
@@ -96,7 +97,7 @@
 						}
 
 						else {
-								$('#pesan_gagal').text("User Gagal Dihapus");
+								$('#pesan_gagal').text("pendukung Gagal Dihapus");
 								$("#gagal").show();
 								setTimeout(function(){
 									$("#gagal").hide(); 

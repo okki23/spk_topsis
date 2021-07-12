@@ -9,12 +9,13 @@ include_once "../../koneksi.php";
            $count=$_POST['count'];
            $id_nilai=$_POST['id_nilai'];
             $jabatan=$_POST['jabatan'];
+            $rekomendasi=$_POST['rekomendasi'];
             $tgl_nilai=$_POST['tgl_nilai'];
             $b=1;
             $id_bobot=array();
             $nilai=array();
             $value=NULL;
-             $cek_kriteria="INSERT INTO penilaian (id_jabatan,tgl_penilaian,status)
+             $cek_kriteria="INSERT INTO penilaian (id_jabatan,tgl_penilaian,status,rekomendasi)
                 SELECT * FROM (SELECT $jabatan bb,STR_TO_DATE('".$tgl_nilai."', '%d/%m/%Y') cc,1 dd)AS Temp
                      WHERE NOT EXISTS  (SELECT B.id_nilai FROM penilaian A
                      INNER JOIN detail_penilaian B ON A.id_nilain=B.id_nilai
