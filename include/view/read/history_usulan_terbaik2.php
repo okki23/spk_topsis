@@ -12,7 +12,7 @@
 include_once "../../../koneksi.php";
 $start=$_POST['start'];
 $end=$_POST['end'];
-$sql_rangking="SELECT DISTINCT no_pegawai,nama_pegawai,nama_toko,nilai,bagian,jabatan,periode FROM usulan WHERE
+$sql_rangking="SELECT DISTINCT no_pegawai,nama_pegawai,nama_unit_kerja,nilai,bagian,jabatan,periode FROM usulan WHERE
      date_format(periode,'%m/%Y')>='$start'
      AND date_format(periode,'%m/%Y')<='$end'
  ORDER BY nilai DESC";
@@ -40,7 +40,7 @@ $hasil_rangking=mysqli_query($db_link,$sql_rangking);
                 <td>".$s."</td>
                  <td>{$data_rangking['no_pegawai']}</td>
                 <td>{$data_rangking['nama_pegawai']}</td>
-                <td>{$data_rangking['nama_toko']}</td>
+                <td>{$data_rangking['nama_unit_kerja']}</td>
                 <td>".$data_rangking['nilai']."</td>
                 <td>{$data_rangking['bagian']}</td>
                 <td>{$data_rangking['jabatan']}</td>

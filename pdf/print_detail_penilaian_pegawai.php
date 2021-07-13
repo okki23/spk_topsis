@@ -10,10 +10,10 @@
 			include_once "../koneksi.php";
 			
        $id_jabatan=$_GET['id_jabatan'];
-		$sql_data="SELECT A.no_pegawai, A.nama, B.jabatan, B.id_jabatan, C.nama_toko, D.tgl_penilaian, E.bagian
-				FROM pegawai A, jabatan_pegawai B, toko C, penilaian D, bagian E
+		$sql_data="SELECT A.no_pegawai, A.nama, B.jabatan, B.id_jabatan, C.nama_unit_kerja, D.tgl_penilaian, E.bagian
+				FROM pegawai A, jabatan_pegawai B, unit_kerja C, penilaian D, bagian E
 				WHERE A.no_pegawai=B.id_pegawai
-				AND C.id_toko=B.id_toko
+				AND C.id_unit_kerja=B.id_unit_kerja
 				AND B.id_jabatan=D.id_jabatan
 				AND E.id_bagian=B.id_bagian
 				AND B.id_jabatan='".$id_jabatan."'";
@@ -42,9 +42,9 @@
 					<td><?php echo $data['bagian'];?> </td>
              	</tr>
 				<tr>
-					<td> Toko</td>
+					<td> unit_kerja</td>
 					<td> : </td>
-					<td><?php echo $data['nama_toko'];?> </td>
+					<td><?php echo $data['nama_unit_kerja'];?> </td>
              	</tr>
 				<tr>
 					<td> Tanggal Penilaian</td>

@@ -6,10 +6,10 @@
 			include_once "../koneksi.php";
 			
        $id_jabatan=$_GET['id_jabatan'];
-		$sql_data="SELECT A.no_pegawai, A.nama, B.jabatan, B.id_jabatan, C.nama_toko, D.tgl_penilaian, E.bagian
-				FROM pegawai A, jabatan_pegawai B, toko C, penilaian D, bagian E
+		$sql_data="SELECT A.no_pegawai, A.nama, B.jabatan, B.id_jabatan, C.nama_unit_kerja, D.tgl_penilaian, E.bagian
+				FROM pegawai A, jabatan_pegawai B, unit_kerja C, penilaian D, bagian E
 				WHERE A.no_pegawai=B.id_pegawai
-				AND C.id_toko=B.id_toko
+				AND C.id_unit_kerja=B.id_unit_kerja
 				AND B.id_jabatan=D.id_jabatan
 				AND E.id_bagian=B.id_bagian
 				AND B.id_jabatan='".$id_jabatan."'";
@@ -32,8 +32,8 @@
              <div class="form-group" id="bagian_group">
                    <label class="control-label col-sm-4" for="bagian">Bagian :</label> <?php echo $data['bagian'];?>
              </div>
-             <div class="form-group" id="toko_group">
-                   <label class="control-label col-sm-4" for="nama_toko">Toko :</label><?php echo $data['nama_toko'];?>
+             <div class="form-group" id="unit_kerja_group">
+                   <label class="control-label col-sm-4" for="nama_unit_kerja">unit_kerja :</label><?php echo $data['nama_unit_kerja'];?>
              </div>
              <div class="form-group" id="tgl_penilaian_group">
                    <label class="control-label col-sm-4" for="tgl_penilaian">Tanggal Penilaian :</label> <?php echo $data['tgl_penilaian'];?>

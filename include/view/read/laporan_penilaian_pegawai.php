@@ -6,14 +6,7 @@
 	<div class="panel-group" >
 		<div class="panel panel-default" style="padding:10px" >
             <br/>
-
-        <div class="col-sm-3 input-group pull-right">
-         <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-        <input type="text" class="form-control" id="nama" placeholder="Search">
-        <span class="input-group-btn">
-        <button id="showall" class="btn btn-danger pull-right"><i class="glyphicon glyphicon-align-justify"></i></button>
-        </span>
-        </div>
+ 
         <br/><br/>
 <?php   
 
@@ -22,12 +15,12 @@ $hasil_kriteria=mysqli_query($db_link,$sql_kriteria);
 $total_kriteria=mysqli_num_rows($hasil_kriteria);
 
 
-$get_user_cek=mysqli_query ($db_link,"SELECT A.id_toko FROM jabatan_pegawai A
+$get_user_cek=mysqli_query ($db_link,"SELECT A.id_unit_kerja FROM jabatan_pegawai A
                             INNER JOIN pegawai B ON A.id_pegawai=B.no_pegawai
                             INNER JOIN user c ON B.no_pegawai=c.id_pegawai
                             WHERE c.user_name=CASE WHEN $hak_akses=3 
                 THEN '".$username."' ELSE c.user_name END ");
-$get_toko_user=mysqli_fetch_assoc($get_user_cek);
+$get_unit_kerja_user=mysqli_fetch_assoc($get_user_cek);
 
 
 
@@ -35,14 +28,13 @@ $get_toko_user=mysqli_fetch_assoc($get_user_cek);
 $sql_penilaian="SELECT DISTINCT C.nama,B.id_jabatan,A.status FROM penilaian A
                 INNER JOIN jabatan_pegawai B ON A.id_jabatan=B.id_jabatan
                 INNER JOIN pegawai C ON B.id_pegawai=C.no_pegawai
-                WHERE B.id_toko=(CASE WHEN $hak_akses =3 
-                THEN ".$get_toko_user['id_toko']." ELSE B.id_toko END)
-				AND B.id_toko=(CASE WHEN $hak_akses =4 
-                THEN ".$get_toko_user['id_toko']." ELSE B.id_toko END)
+                WHERE B.id_unit_kerja=(CASE WHEN $hak_akses =3 
+                THEN ".$get_unit_kerja_user['id_unit_kerja']." ELSE B.id_unit_kerja END)
+				AND B.id_unit_kerja=(CASE WHEN $hak_akses =4 
+                THEN ".$get_unit_kerja_user['id_unit_kerja']." ELSE B.id_unit_kerja END)
                 ORDER BY C.nama asc, A.Status desc";
 $hasil_penilaian=mysqli_query($db_link,$sql_penilaian);
-        echo '<table class="table table-bordered table-hover text-center panel panel-primary" >
-                    
+        echo '<table class="table table-bordered table-hover text-center panel panel-primary" id="example"> 
                 <thead class="panel-heading">
                 <tr>
                     <th class="text-center" rowspan="2" style="vertical-align: middle;">NO</th>
@@ -143,8 +135,9 @@ $hasil_penilaian=mysqli_query($db_link,$sql_penilaian);
 </div>
 
 <script src="../vendor/jquery/jquery.min.js"></script>
-
+<script src="http://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 <script>
+	$('#example').DataTable();
 	 $(document).ready(function () {
 
         $(".detail").click(function () {
