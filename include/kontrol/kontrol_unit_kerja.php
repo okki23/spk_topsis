@@ -1,15 +1,15 @@
 <?php
 include_once "../../koneksi.php";
 
-if(isset($_POST['id_toko']) || isset ($_POST['nama_toko'])|| isset($_POST['alamat_toko'])){
+if(isset($_POST['id_unit_kerja']) || isset ($_POST['nama_unit_kerja'])|| isset($_POST['alamat_unit_kerja'])){
 
 
     if (isset($_POST['crud'])){
         if($_POST['crud']=='update'){
-            $id_toko=$_POST['id_toko'];
-            $nama_toko=$_POST['nama_toko'];
-            $alamat_toko=$_POST['alamat_toko'];
-            $proses="UPDATE toko SET nama_toko='$nama_toko',alamat_toko='$alamat_toko' WHERE id_toko='$id_toko'";
+            $id_unit_kerja=$_POST['id_unit_kerja'];
+            $nama_unit_kerja=$_POST['nama_unit_kerja'];
+            $alamat_unit_kerja=$_POST['alamat_unit_kerja'];
+            $proses="UPDATE unit_kerja SET nama_unit_kerja='$nama_unit_kerja',alamat_unit_kerja='$alamat_unit_kerja' WHERE id_unit_kerja='$id_unit_kerja'";
             $hasil = mysqli_query($db_link,$proses);
             if($hasil){
                 echo "berhasil";
@@ -21,10 +21,10 @@ if(isset($_POST['id_toko']) || isset ($_POST['nama_toko'])|| isset($_POST['alama
         }
 
         if($_POST['crud']=='tambah'){
-        $nama_toko=$_POST['nama_toko'];
-        $alamat_toko=$_POST['alamat_toko'];
-            $sql = "INSERT INTO toko (nama_toko,alamat_toko)
-                    VALUES ('".$nama_toko."','".$alamat_toko."') ";
+        $nama_unit_kerja=$_POST['nama_unit_kerja'];
+        $alamat_unit_kerja=$_POST['alamat_unit_kerja'];
+            $sql = "INSERT INTO unit_kerja (nama_unit_kerja,alamat_unit_kerja)
+                    VALUES ('".$nama_unit_kerja."','".$alamat_unit_kerja."') ";
             $hasil = mysqli_query($db_link,$sql); 
             
             if ($hasil) {
@@ -37,8 +37,8 @@ if(isset($_POST['id_toko']) || isset ($_POST['nama_toko'])|| isset($_POST['alama
         }
 
         if($_POST['crud']=='hapus'){
-           $id_toko = $_POST['id_toko'];
-            $sql = "DELETE from toko where id_toko=".$id_toko;
+           $id_unit_kerja = $_POST['id_unit_kerja'];
+            $sql = "DELETE from unit_kerja where id_unit_kerja=".$id_unit_kerja;
             $hasil = mysqli_query($db_link,$sql);
             if($hasil){
                  echo "berhasil";

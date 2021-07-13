@@ -2,7 +2,7 @@
     include_once "../../../koneksi.php";
 	$start 			=$_POST['start'];
 	$end 			=$_POST['end'];
-    $id_unit_kerja		=$_POST['id_unit_kerja'];
+    $id_unit_kerja	=$_POST['id_unit_kerja'];
     $jabatan		=$_POST['jabatan'];
     $id_bagian		=$_POST['id_bagian'];
     $jum_terbaik	=$_POST['jum_terbaik'];
@@ -51,6 +51,8 @@
     $nilai_krit=mysqli_query($db_link,$sqlfornilai); 
     echo mysqli_error($db_link);                                 
     $nilai_krit2=mysqli_query($db_link,$sqlfornilai);
+    var_dump($nilai_krit2);
+    die();
          if(!$nilai_krit){
                  mysqli_errno($db_link);
          }
@@ -67,6 +69,7 @@
                
         //matrix keputusan normalisasi per kriteria
          while($data_nilai=mysqli_fetch_assoc($nilai_krit2)){
+             var_dump($data_nilai);
                 //nilai merupakan hasil pangkat
                 $y[$d][$e]=($data_nilai['nilai']/$x[$d])*$data_nilai['akumulasi'];   
   

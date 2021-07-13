@@ -1,0 +1,12 @@
+from = 'manager', 'HRD', 'koordinator', 'karyawan'
+to = 'admin', 'Kapus', 'Kabag', 'Pegawai'
+
+laravel
+user-spv-admin
+
+user->landingpe(form user regis,login - username&pass)
+spv->landingpage
+admin->useradmin 
+
+user baru nunggu approval admin
+responsive FE

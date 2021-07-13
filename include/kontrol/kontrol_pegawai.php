@@ -46,7 +46,7 @@ if( isset($_POST['no_pegawai']) ||
         }
 
         if($_POST['crud']=='tambah'){
-             $no_pegawai=$_POST['no_pegawai'];
+            $no_pegawai=$_POST['no_pegawai'];
             $nama_pegawai=$_POST['nama_pegawai'];
             $tempat_lahir=$_POST['tempat_lahir'];
             $tanggal_lahir=$_POST['tanggal_lahir'];

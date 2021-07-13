@@ -42,7 +42,7 @@
 						<div class="col-sm-12">
 						<?php
 						 if($hak_akses==0 || $hak_akses==2  ){
-							echo '<button type="button" id="tambah" class="btn btn-success">TAMBAH unit_kerja</button>';
+							echo '<button type="button" id="tambah" class="btn btn-success">TAMBAH UNIT KERJA</button>';
 						}
 						?>
 						<button class="btn btn-primary hidden-print" onclick="printJS('../pdf/print_unit_kerja.php')">

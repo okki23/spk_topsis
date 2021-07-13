@@ -27,13 +27,13 @@
 										echo "Admin";
 									}
 									else if($data['hak_akses']==1){
-										echo "Manager";
+										echo "Admin";
 									}
 									else if($data['hak_akses']==2){
-										echo "HRD";
+										echo "Kapus";
 									}
 									else if($data['hak_akses']==3){
-										echo "Koordinator";
+										echo "Kabag";
 									}
 									else if($data['hak_akses']==4){
 										echo "Pegawai";
