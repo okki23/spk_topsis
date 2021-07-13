@@ -1,30 +1,47 @@
 <?php 
 error_reporting(0);
 include_once "../../koneksi.php";
-$id_jabatan = isset($_POST['id_jabatan']);
-$sql = "select a.*,b.nama,c.nama_kegiatan,c.file_pendukung from jabatan_pegawai a 
+$id_jabatan=$_GET['id_jabatan'];
+
+$sqlrek = "select a.*,b.nama from pendukung a 
 left join pegawai b on b.no_pegawai = a.id_pegawai
-left join pendukung c on c.id_pegawai = a.id_pegawai
-where a.id_jabatan = '".$id_jabatan."' ";
-$ex = mysqli_query($db_link,$sql);
-$data = mysqli_fetch_assoc($ex);
-
-$res_kegiatan = '';
-$res_file = '';
-
-if($data['nama_kegiatan'] == NULL || $data['nama_kegiatan'] == ''){
-    
-    $res_kegiatan = 'Belum Ada';
-}else{
-    $res_kegiatan = $data['nama_kegiatan'];
-     
+left join jabatan_pegawai c on c.id_pegawai = a.id_pegawai
+   where c.id_jabatan = '".$id_jabatan."' ";
+$exrek = mysqli_query($db_link,$sqlrek); 
+// $datarek = mysqli_fetch_array($exrek);  
+$no = 1;
+echo '<table class="table table-bordered table-hover text-center panel panel-primary" id="example">
+        <tr>
+        <td> No </td>
+        <td> Nama Berkas Pendukung </td>
+        <td> File Pendukung </td>
+        </tr>
+';
+while($datarek = mysqli_fetch_array($exrek)){
+   echo "<tr> 
+            <td>".$no."</td>
+            <td>".$datarek['nama_kegiatan']."<td>
+            <td>".$datarek['file_kegiatan']."<td>
+            ";
+$no++;
 }
 
-if($data['file_pendukung'] == NULL || $data['file_pendukung'] == ''){
-    $res_file = 'Belum Ada'; 
-}else{
-    $res_file = "<a href='../../upload/'".$data['file_pendukung']."'> AAAA </a>"; 
-}
- 
-echo "Nama Kegiatan : ".$res_kegiatan." <br> Berkas Pendukung : ".$res_file;
+// $res_nk = '';
+// $res_fk = '';
+// if($datarek['nama_kegiatan'] != NULL || $datarek['nama_kegiatan'] != ''){
+//     $res_nk = $datarek['nama_kegiatan'];
+// }else{
+//     $res_nk = ' - '; 
+// }
+
+// if($datarek['file_pendukung'] != NULL || $datarek['file_pendukung'] != ''){ 
+//     $res_fk = '<a href="http://localhost/spk_topsis/upload/'.$datarek['file_pendukung'].'" target="_blank"> Download File </a>';
+// }else{
+//     $res_fk = ' - ';
+// }
+
+// echo "<br> <div align='center'> <h3> <b> Nama Kegiatan : ".$res_nk." </b> </h3> <br> <h3> <b> File Pendukung : ".$res_fk." </b> </h3> </div> <br> &nbsp;";
 ?>
+<script src="../vendor/jquery/jquery.min.js"></script>
+ 
+<link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">

@@ -11,7 +11,7 @@
  Target Server Version : 100419
  File Encoding         : 65001
 
- Date: 12/07/2021 22:08:54
+ Date: 13/07/2021 11:12:41
 */
 
 SET NAMES utf8mb4;
@@ -783,16 +783,6 @@ INSERT INTO `detail_penilaian` VALUES (729, 79, 157, 70);
 INSERT INTO `detail_penilaian` VALUES (730, 79, 158, 80);
 INSERT INTO `detail_penilaian` VALUES (731, 79, 159, 60);
 INSERT INTO `detail_penilaian` VALUES (732, 79, 160, 75);
-INSERT INTO `detail_penilaian` VALUES (733, 80, 151, 65);
-INSERT INTO `detail_penilaian` VALUES (734, 80, 152, 85);
-INSERT INTO `detail_penilaian` VALUES (735, 80, 153, 1);
-INSERT INTO `detail_penilaian` VALUES (736, 80, 154, 80);
-INSERT INTO `detail_penilaian` VALUES (737, 80, 155, 80);
-INSERT INTO `detail_penilaian` VALUES (738, 80, 156, 85);
-INSERT INTO `detail_penilaian` VALUES (739, 80, 157, 70);
-INSERT INTO `detail_penilaian` VALUES (740, 80, 158, 85);
-INSERT INTO `detail_penilaian` VALUES (741, 80, 159, 50);
-INSERT INTO `detail_penilaian` VALUES (742, 80, 160, 80);
 INSERT INTO `detail_penilaian` VALUES (753, 82, 171, 80);
 INSERT INTO `detail_penilaian` VALUES (754, 82, 172, 85);
 INSERT INTO `detail_penilaian` VALUES (755, 82, 173, 1);
@@ -973,16 +963,6 @@ INSERT INTO `detail_penilaian` VALUES (979, 104, 257, 70);
 INSERT INTO `detail_penilaian` VALUES (980, 104, 258, 80);
 INSERT INTO `detail_penilaian` VALUES (981, 104, 259, 60);
 INSERT INTO `detail_penilaian` VALUES (982, 104, 260, 75);
-INSERT INTO `detail_penilaian` VALUES (983, 105, 251, 65);
-INSERT INTO `detail_penilaian` VALUES (984, 105, 252, 85);
-INSERT INTO `detail_penilaian` VALUES (985, 105, 253, 1);
-INSERT INTO `detail_penilaian` VALUES (986, 105, 254, 80);
-INSERT INTO `detail_penilaian` VALUES (987, 105, 255, 80);
-INSERT INTO `detail_penilaian` VALUES (988, 105, 256, 85);
-INSERT INTO `detail_penilaian` VALUES (989, 105, 257, 70);
-INSERT INTO `detail_penilaian` VALUES (990, 105, 258, 85);
-INSERT INTO `detail_penilaian` VALUES (991, 105, 259, 50);
-INSERT INTO `detail_penilaian` VALUES (992, 105, 260, 80);
 INSERT INTO `detail_penilaian` VALUES (993, 54, 213, 3);
 INSERT INTO `detail_penilaian` VALUES (994, 106, 101, 80);
 INSERT INTO `detail_penilaian` VALUES (995, 106, 102, 70);
@@ -1850,12 +1830,13 @@ CREATE TABLE `pendukung`  (
   `file_pendukung` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `nama_kegiatan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pendukung
 -- ----------------------------
 INSERT INTO `pendukung` VALUES (5, 'P-0008', 'gila.jpg', 'makan');
+INSERT INTO `pendukung` VALUES (6, 'P-0008', 'dodol.png', 'makan nasi');
 
 -- ----------------------------
 -- Table structure for penilaian
@@ -1926,7 +1907,6 @@ INSERT INTO `penilaian` VALUES (75, 64, '2017-11-30', 1, '');
 INSERT INTO `penilaian` VALUES (77, 66, '2017-11-30', 1, '');
 INSERT INTO `penilaian` VALUES (78, 67, '2017-11-30', 1, '');
 INSERT INTO `penilaian` VALUES (79, 68, '2017-11-30', 1, '');
-INSERT INTO `penilaian` VALUES (80, 69, '2017-11-30', 1, '');
 INSERT INTO `penilaian` VALUES (82, 71, '2017-11-30', 1, '');
 INSERT INTO `penilaian` VALUES (83, 72, '2017-11-30', 1, '');
 INSERT INTO `penilaian` VALUES (84, 73, '2017-11-30', 1, '');
@@ -1945,7 +1925,6 @@ INSERT INTO `penilaian` VALUES (101, 65, '2017-11-30', 1, '');
 INSERT INTO `penilaian` VALUES (102, 91, '2017-11-30', 1, '');
 INSERT INTO `penilaian` VALUES (103, 92, '2017-11-30', 1, '');
 INSERT INTO `penilaian` VALUES (104, 93, '2017-11-30', 1, '');
-INSERT INTO `penilaian` VALUES (105, 94, '2017-11-30', 1, '');
 INSERT INTO `penilaian` VALUES (106, 55, '2017-11-30', 1, '');
 INSERT INTO `penilaian` VALUES (107, 57, '2017-11-30', 1, '');
 INSERT INTO `penilaian` VALUES (108, 90, '2017-11-30', 1, '');

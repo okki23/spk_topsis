@@ -77,8 +77,7 @@ $hasil_penilaian=mysqli_query($db_link,$sql_penilaian);
             $d=1;
             while ($d<=$total_kriteria){
                 $sql="SELECT A.id_nilai,BB.nilai FROM penilaian A
-                        INNER JOIN detail_penilaian BB ON A.id_nilai=BB.id_nilai
- 
+                        INNER JOIN detail_penilaian BB ON A.id_nilai=BB.id_nilai 
                         INNER JOIN detail_bobot CC ON BB.id_detailbobot=CC.id_detailbobot
                         INNER JOIN bobot_penilaian B ON CC.id_bobot=B.id_bobot
                         INNER JOIN jabatan_pegawai C ON A.id_jabatan=C.id_jabatan
