@@ -17,27 +17,40 @@
 				</thead>
 				<tbody>
 					<?php /*php pembuka tabel atas*/
-							$sql = "SELECT no_pegawai,nama,jekel,agama,status_perkawinan,tgl_masuk 
-							FROM pegawai a
-							LEFT JOIN jabatan_pegawai bb on a.no_pegawai=bb.id_pegawai
-							LEFT JOIN user b ON a.no_pegawai=b.id_pegawai
-							WHERE  bb.id_unit_kerja=
-							CASE WHEN $hak_akses=3 THEN
-							(SELECT distinct id_unit_kerja FROM jabatan_pegawai a 
-							INNER JOIN pegawai b ON a.id_pegawai=b.no_pegawai
-							INNER JOIN user c ON b.no_pegawai=c.id_pegawai
-							WHERE c.user_name='$username')  
-							ELSE bb.id_unit_kerja END
-							AND bb.id_bagian=
-							CASE WHEN $hak_akses=3 THEN(SELECT distinct id_bagian FROM jabatan_pegawai a 
-							INNER JOIN pegawai b ON a.id_pegawai=b.no_pegawai
-							INNER JOIN user c ON b.no_pegawai=c.id_pegawai
-							WHERE c.user_name='$username')
-							ELSE bb.id_bagian END
-							AND 1= CASE WHEN $hak_akses<>4 THEN 1
-							WHEN $hak_akses=4 AND b.user_name='$username' THEN 1
-							ELSE 0 END
-							ORDER BY no_pegawai";
+					// $sql = "select * from pegawai l";
+				 
+					if($hak_akses==3){
+						$sql = "SELECT a.* FROM pegawai a
+						LEFT JOIN jabatan_pegawai b on b.id_pegawai = a.no_pegawai
+						LEFT JOIN user c on c.id_pegawai = a.no_pegawai where c.user_name = '$username' ";
+					}else{
+						$sql = "SELECT a.* FROM pegawai a
+						LEFT JOIN jabatan_pegawai b on b.id_pegawai = a.no_pegawai
+						LEFT JOIN user c on c.id_pegawai = a.no_pegawai";
+					}
+				 
+ 
+							// $sql = "SELECT no_pegawai,nama,jekel,agama,status_perkawinan,tgl_masuk 
+							// FROM pegawai a
+							// LEFT JOIN jabatan_pegawai bb on a.no_pegawai=bb.id_pegawai
+							// LEFT JOIN user b ON a.no_pegawai=b.id_pegawai
+							// WHERE  bb.id_unit_kerja=
+							// CASE WHEN $hak_akses=3 THEN
+							// (SELECT distinct id_unit_kerja FROM jabatan_pegawai a 
+							// LEFT JOIN pegawai b ON a.id_pegawai=b.no_pegawai
+							// LEFT JOIN user c ON b.no_pegawai=c.id_pegawai
+							// WHERE c.user_name='$username')  
+							// ELSE bb.id_unit_kerja END
+							// AND bb.id_bagian=
+							// CASE WHEN $hak_akses=3 THEN(SELECT distinct id_bagian FROM jabatan_pegawai a 
+							// LEFT JOIN pegawai b ON a.id_pegawai=b.no_pegawai
+							// LEFT JOIN user c ON b.no_pegawai=c.id_pegawai
+							// WHERE c.user_name='$username')
+							// ELSE bb.id_bagian END
+							// AND 1= CASE WHEN $hak_akses<>4 THEN 1
+							// WHEN $hak_akses=4 AND b.user_name='$username' THEN 1
+							// ELSE 0 END
+							// ORDER BY no_pegawai";
 						 
 							$hasil = mysqli_query($db_link,$sql);
 							if (!$hasil){

@@ -18,10 +18,10 @@
 <span style='color:blue'>
 <?php 
 if ($data['hak_akses']=='0') {echo 'Admin';} 
-if ($data['hak_akses']=='1') {echo 'Manajer';} 
-if ($data['hak_akses']=='2') {echo 'HRD';} 
-if ($data['hak_akses']=='3') {echo 'Koordinator';} 
-if ($data['hak_akses']=='4') {echo 'Karyawan';} 
+if ($data['hak_akses']=='1') {echo 'Admin';} 
+if ($data['hak_akses']=='2') {echo 'Kapus';} 
+if ($data['hak_akses']=='3') {echo 'Kabag';} 
+if ($data['hak_akses']=='4') {echo 'Pegawai';} 
 ?>
 </span>
 
