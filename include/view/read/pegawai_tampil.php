@@ -18,8 +18,8 @@
 				<tbody>
 					<?php /*php pembuka tabel atas*/
 					// $sql = "select * from pegawai l";
-				 
-					if($hak_akses==3){
+				 	 
+					if($hak_akses==4){
 						$sql = "SELECT a.* FROM pegawai a
 						LEFT JOIN jabatan_pegawai b on b.id_pegawai = a.no_pegawai
 						LEFT JOIN user c on c.id_pegawai = a.no_pegawai where c.user_name = '$username' ";
