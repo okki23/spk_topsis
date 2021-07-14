@@ -36,7 +36,7 @@
                     INNER JOIN detail_penilaian BB ON A.id_nilai=BB.id_nilai
                       INNER JOIN jabatan_pegawai B ON A.id_jabatan=B.id_jabatan
                       INNER JOIN pegawai C ON B.id_pegawai=C.no_pegawai
-                       INNER JOIN detail_bobot DD ON BB.id_detailbobot=DD.id_detailbobot
+                      INNER JOIN detail_bobot DD ON BB.id_detailbobot=DD.id_detailbobot
                       INNER JOIN bobot_penilaian D ON DD.id_bobot=D.id_bobot AND B.jabatan=D.jabatan
                       INNER JOIN unit_kerja E ON B.id_unit_kerja=E.id_unit_kerja
                       INNER JOIN bagian F ON B.id_bagian=F.id_bagian
@@ -48,11 +48,11 @@
                       AND D.status=1 AND A.status=1
                       ORDER BY C.no_pegawai;
                       "; 
+                      
     $nilai_krit=mysqli_query($db_link,$sqlfornilai); 
     echo mysqli_error($db_link);                                 
     $nilai_krit2=mysqli_query($db_link,$sqlfornilai);
-    var_dump($nilai_krit2);
-    die();
+    
          if(!$nilai_krit){
                  mysqli_errno($db_link);
          }
@@ -69,7 +69,7 @@
                
         //matrix keputusan normalisasi per kriteria
          while($data_nilai=mysqli_fetch_assoc($nilai_krit2)){
-             var_dump($data_nilai);
+            //  var_dump($data_nilai);
                 //nilai merupakan hasil pangkat
                 $y[$d][$e]=($data_nilai['nilai']/$x[$d])*$data_nilai['akumulasi'];   
   

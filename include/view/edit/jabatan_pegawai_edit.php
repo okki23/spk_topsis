@@ -70,10 +70,10 @@
                         <label class="control-label col-sm-4" for="jabatan">Jabatan : </label>
                         <div class="col-sm-6">
                                 <select  class="form-control" name="jabatan" id="jabatan">  
-                                <option value="manager" <?php   if ($row['jabatan']=='manager') echo "selected='selected'"; ?>>Manager</option>
-                                <option value="HRD" <?php if ($row['jabatan']=='HRD') echo "selected='selected'"; ?>>HRD</option>
-                                <option value="koordinator" <?php if ($row['jabatan']=='koordinator') echo "selected='selected'"; ?>>Koordinator</option>
-                                <option value="karyawan" <?php if ($row['jabatan']=='karyawan') echo "selected='selected'"; ?>>Karyawan</option>
+                                <option value="Admin" <?php   if ($row['jabatan']=='Admin') echo "selected='selected'"; ?>>Admin</option>
+                                <option value="Kapus" <?php if ($row['jabatan']=='Kapus') echo "selected='selected'"; ?>>Kapus</option>
+                                <option value="Kabag" <?php if ($row['jabatan']=='Kabag') echo "selected='selected'"; ?>>Kabag</option>
+                                <option value="Pegawai" <?php if ($row['jabatan']=='Pegawai') echo "selected='selected'"; ?>>Pegawai</option>
                             </select> 
                         </div>
                     </div>

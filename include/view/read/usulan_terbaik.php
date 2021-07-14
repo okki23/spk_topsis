@@ -32,7 +32,7 @@ $bag=mysqli_query($db_link,"SELECT id_bagian,bagian FROM bagian");
                     </div>
                 </div>
              <div class="form-group">
-                <label class="control-label col-sm-3" for="unit_kerja">unit_kerja : </label>
+                <label class="control-label col-sm-3" for="unit_kerja">Unit Kerja : </label>
                 <div class="col-sm-5">
                     <select  class="form-control" name="unit_kerja">  
                         <option value='0'>All</option>
@@ -49,8 +49,8 @@ $bag=mysqli_query($db_link,"SELECT id_bagian,bagian FROM bagian");
                 <div class="col-sm-5">
                         <select  class="form-control" name="jabatan" id="jabatan">  
                         <option value="none">All</option>
-                        <option value="koordinator">Koordinator</option>
-                        <option value="karyawan">Karyawan</option>
+                        <option value="Kabag">Kabag</option>
+                        <option value="Pegawai">Pegawai</option>
                     </select> 
                 </div>
             </div>
@@ -70,7 +70,7 @@ $bag=mysqli_query($db_link,"SELECT id_bagian,bagian FROM bagian");
            <div class="form-group" id="id_group_jum_terbaik">
                 <label class="control-label col-sm-3" for="unit_kerja">Jumlah Terbaik : </label>
                 <div class="col-sm-5">
-                   <input type="number" min="1" max="10" name='jumlah_terbaik' class="form-control">
+                   <input type="number" min="1" max="10" name='jumlah_terbaik' required="required" class="form-control">
                 </div>
            </div>
            <div class="text-center">	
@@ -108,13 +108,17 @@ $bag=mysqli_query($db_link,"SELECT id_bagian,bagian FROM bagian");
 	 $(document).ready(function () {
 $('#show').hide();
         $("#tampil").click(function () {
+            
              var start= $('input[name=start]').val();
              var end= $('input[name=end]').val();
             var id_unit_kerja= $('select[name=unit_kerja]').val();
             var jabatan= $('select[name=jabatan]').val();
             var id_bagian= $('select[name=bagian]').val();
             var jum_terbaik= $('input[name=jumlah_terbaik]').val();
-           	$.ajax({
+            if(jum_terbaik == ''){
+                alert('Jumlah Terbaik tidak boleh kosong!');
+            }else{
+                $.ajax({
 					type: "POST",
 					url: "../include/view/read/usulan_terbaik2.php",
 					data: 'start='+start+'&end='+end+'&id_unit_kerja='+id_unit_kerja+'&jabatan='+jabatan+'&id_bagian='+id_bagian+'&jum_terbaik='+jum_terbaik,
@@ -124,6 +128,8 @@ $('#show').hide();
                         
                     }
                });
+            }
+    
         });
 
  $("#matrik").click(function () {

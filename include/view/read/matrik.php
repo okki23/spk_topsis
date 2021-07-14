@@ -49,8 +49,8 @@ $bag=mysqli_query($db_link,"SELECT id_bagian,bagian FROM bagian");
                 <div class="col-sm-5">
                         <select  class="form-control" name="jabatan" id="jabatan">  
                         <option value="none">All</option>
-                        <option value="koordinator">Koordinator</option>
-                        <option value="karyawan">Karyawan</option>
+                        <option value="Kabag">Kabag</option>
+                        <option value="Pegawai">Pegawai</option>
                     </select> 
                 </div>
             </div>

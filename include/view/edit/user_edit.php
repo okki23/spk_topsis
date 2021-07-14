@@ -50,10 +50,10 @@
                       <label class="control-label col-sm-3" for="hak_akses">Hak akses :</label>
                         <div class="col-sm-8"> 
                            <select  class="form-control" name="hak_akses" id="hak_akses">  
-                              <option value="manager" <?php   if ($row['hak_akses']=='manager') echo "selected='selected'"; ?>>Manager</option>
-                              <option value="HRD" <?php if ($row['hak_akses']=='HRD') echo "selected='selected'"; ?>>HRD</option>
-                              <option value="koordinator" <?php if ($row['hak_akses']=='koordinator') echo "selected='selected'"; ?>>Koordinator</option>
-                              <option value="karyawan" <?php if ($row['hak_akses']=='karyawan') echo "selected='selected'"; ?>>Karyawan</option>
+                              <option value="Admin" <?php   if ($row['hak_akses']=='Admin') echo "selected='selected'"; ?>>Admin</option>
+                              <option value="Kapus" <?php if ($row['hak_akses']=='Kapus') echo "selected='selected'"; ?>>Kapus</option>
+                              <option value="Kabag" <?php if ($row['hak_akses']=='Kabag') echo "selected='selected'"; ?>>Kabag</option>
+                              <option value="Pegawai" <?php if ($row['hak_akses']=='Pegawai') echo "selected='selected'"; ?>>Pegawai</option>
                            </select> 
                         </div>
                     </div>

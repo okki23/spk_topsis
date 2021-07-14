@@ -2,7 +2,7 @@
 include_once "../../koneksi.php";
 
   if (isset($_POST['crud'])){
-
+$hasil='';
         if($_POST['crud']=='tambah'){
            $b=1;
            $count=$_POST['count'];

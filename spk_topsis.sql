@@ -11,7 +11,7 @@
  Target Server Version : 100419
  File Encoding         : 65001
 
- Date: 13/07/2021 11:12:41
+ Date: 15/07/2021 03:44:10
 */
 
 SET NAMES utf8mb4;
@@ -47,32 +47,33 @@ DROP TABLE IF EXISTS `bobot_penilaian`;
 CREATE TABLE `bobot_penilaian`  (
   `id_bobot` int NOT NULL AUTO_INCREMENT,
   `id_bagian` char(8) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
-  `jabatan` enum('manager','HRD','koordinator','karyawan') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
+  `jabatan` enum('Admin','Kapus','Kabag','Pegawai') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL,
   `status` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_bobot`) USING BTREE,
   INDEX `FK_bobot_penilaian_bagian`(`id_bagian`) USING BTREE,
   CONSTRAINT `FK_bobot_penilaian_bagian` FOREIGN KEY (`id_bagian`) REFERENCES `bagian` (`id_bagian`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of bobot_penilaian
 -- ----------------------------
-INSERT INTO `bobot_penilaian` VALUES (17, 'B-0001', 'koordinator', 1);
-INSERT INTO `bobot_penilaian` VALUES (18, 'B-0001', 'karyawan', 1);
-INSERT INTO `bobot_penilaian` VALUES (19, 'B-0002', 'koordinator', 1);
-INSERT INTO `bobot_penilaian` VALUES (20, 'B-0002', 'karyawan', 1);
-INSERT INTO `bobot_penilaian` VALUES (21, 'B-0003', 'koordinator', 1);
-INSERT INTO `bobot_penilaian` VALUES (22, 'B-0003', 'karyawan', 1);
-INSERT INTO `bobot_penilaian` VALUES (23, 'B-0004', 'koordinator', 1);
-INSERT INTO `bobot_penilaian` VALUES (24, 'B-0004', 'karyawan', 1);
-INSERT INTO `bobot_penilaian` VALUES (25, 'B-0005', 'koordinator', 1);
-INSERT INTO `bobot_penilaian` VALUES (26, 'B-0005', 'karyawan', 1);
-INSERT INTO `bobot_penilaian` VALUES (27, 'B-0006', 'koordinator', 1);
-INSERT INTO `bobot_penilaian` VALUES (28, 'B-0006', 'karyawan', 1);
-INSERT INTO `bobot_penilaian` VALUES (29, 'B-0007', 'koordinator', 1);
-INSERT INTO `bobot_penilaian` VALUES (30, 'B-0007', 'karyawan', 1);
-INSERT INTO `bobot_penilaian` VALUES (31, 'B-0008', 'koordinator', 1);
-INSERT INTO `bobot_penilaian` VALUES (32, 'B-0008', 'karyawan', 1);
+INSERT INTO `bobot_penilaian` VALUES (17, 'B-0001', 'Kabag', 1);
+INSERT INTO `bobot_penilaian` VALUES (18, 'B-0001', 'Pegawai', 1);
+INSERT INTO `bobot_penilaian` VALUES (19, 'B-0002', 'Kabag', 1);
+INSERT INTO `bobot_penilaian` VALUES (20, 'B-0002', 'Pegawai', 1);
+INSERT INTO `bobot_penilaian` VALUES (21, 'B-0003', 'Kabag', 1);
+INSERT INTO `bobot_penilaian` VALUES (22, 'B-0003', 'Pegawai', 1);
+INSERT INTO `bobot_penilaian` VALUES (23, 'B-0004', 'Kabag', 1);
+INSERT INTO `bobot_penilaian` VALUES (24, 'B-0004', 'Pegawai', 1);
+INSERT INTO `bobot_penilaian` VALUES (25, 'B-0005', 'Kabag', 1);
+INSERT INTO `bobot_penilaian` VALUES (26, 'B-0005', 'Pegawai', 1);
+INSERT INTO `bobot_penilaian` VALUES (27, 'B-0006', 'Kabag', 1);
+INSERT INTO `bobot_penilaian` VALUES (28, 'B-0006', 'Pegawai', 1);
+INSERT INTO `bobot_penilaian` VALUES (29, 'B-0007', 'Kabag', 1);
+INSERT INTO `bobot_penilaian` VALUES (30, 'B-0007', 'Pegawai', 1);
+INSERT INTO `bobot_penilaian` VALUES (31, 'B-0008', 'Kabag', 1);
+INSERT INTO `bobot_penilaian` VALUES (32, 'B-0008', 'Pegawai', 0);
+INSERT INTO `bobot_penilaian` VALUES (33, 'B-0008', 'Kabag', 1);
 
 -- ----------------------------
 -- Table structure for detail_bobot
@@ -89,7 +90,7 @@ CREATE TABLE `detail_bobot`  (
   INDEX `FK_detail_bobot_kriteria`(`id_kriteria`) USING BTREE,
   CONSTRAINT `FK_detail_bobot_bobot_penilaian` FOREIGN KEY (`id_bobot`) REFERENCES `bobot_penilaian` (`id_bobot`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_detail_bobot_kriteria` FOREIGN KEY (`id_kriteria`) REFERENCES `kriteria` (`id_kriteria`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 261 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 271 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of detail_bobot
@@ -254,6 +255,16 @@ INSERT INTO `detail_bobot` VALUES (257, 32, 'K-0007', 4, 10.00);
 INSERT INTO `detail_bobot` VALUES (258, 32, 'K-0008', 4, 10.00);
 INSERT INTO `detail_bobot` VALUES (259, 32, 'K-0009', 3, 7.50);
 INSERT INTO `detail_bobot` VALUES (260, 32, 'K-0010', 4, 10.00);
+INSERT INTO `detail_bobot` VALUES (261, 33, 'K-0001', 3, 10.00);
+INSERT INTO `detail_bobot` VALUES (262, 33, 'K-0002', 3, 10.00);
+INSERT INTO `detail_bobot` VALUES (263, 33, 'K-0003', 3, 10.00);
+INSERT INTO `detail_bobot` VALUES (264, 33, 'K-0004', 3, 10.00);
+INSERT INTO `detail_bobot` VALUES (265, 33, 'K-0005', 3, 10.00);
+INSERT INTO `detail_bobot` VALUES (266, 33, 'K-0006', 3, 10.00);
+INSERT INTO `detail_bobot` VALUES (267, 33, 'K-0007', 3, 10.00);
+INSERT INTO `detail_bobot` VALUES (268, 33, 'K-0008', 3, 10.00);
+INSERT INTO `detail_bobot` VALUES (269, 33, 'K-0009', 3, 10.00);
+INSERT INTO `detail_bobot` VALUES (270, 33, 'K-0010', 3, 10.00);
 
 -- ----------------------------
 -- Table structure for detail_penilaian
@@ -1513,7 +1524,7 @@ CREATE TABLE `jabatan_pegawai`  (
   `id_pegawai` char(8) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '0',
   `id_unit_kerja` int NOT NULL DEFAULT 0,
   `id_bagian` char(8) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '0',
-  `jabatan` enum('manager','HRD','koordinator','karyawan') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `jabatan` enum('Admin','Kapus','Kabag','Pegawai') CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `Status` tinyint(1) NOT NULL,
   `tgl_jabat` date NOT NULL,
   PRIMARY KEY (`id_jabatan`) USING BTREE,
@@ -1523,133 +1534,134 @@ CREATE TABLE `jabatan_pegawai`  (
   CONSTRAINT `FK_jabatan_pegawai_bagian` FOREIGN KEY (`id_bagian`) REFERENCES `bagian` (`id_bagian`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_jabatan_pegawai_pegawai` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`no_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_jabatan_pegawai_toko` FOREIGN KEY (`id_unit_kerja`) REFERENCES `unit_kerja` (`id_unit_kerja`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 137 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 138 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of jabatan_pegawai
 -- ----------------------------
-INSERT INTO `jabatan_pegawai` VALUES (15, 'P-0001', 27, 'B-0008', 'koordinator', 1, '2010-02-20');
-INSERT INTO `jabatan_pegawai` VALUES (16, 'P-0002', 27, 'B-0008', 'karyawan', 1, '2011-02-10');
-INSERT INTO `jabatan_pegawai` VALUES (17, 'P-0003', 27, 'B-0008', 'karyawan', 1, '2012-11-10');
-INSERT INTO `jabatan_pegawai` VALUES (18, 'P-0004', 27, 'B-0008', 'karyawan', 1, '2015-07-20');
-INSERT INTO `jabatan_pegawai` VALUES (19, 'P-0005', 27, 'B-0008', 'karyawan', 1, '2015-10-10');
-INSERT INTO `jabatan_pegawai` VALUES (20, 'P-0006', 27, 'B-0002', 'koordinator', 1, '2010-03-13');
-INSERT INTO `jabatan_pegawai` VALUES (21, 'P-0007', 27, 'B-0002', 'karyawan', 1, '2010-10-12');
-INSERT INTO `jabatan_pegawai` VALUES (22, 'P-0008', 27, 'B-0002', 'karyawan', 1, '2012-01-25');
-INSERT INTO `jabatan_pegawai` VALUES (23, 'P-0009', 27, 'B-0002', 'karyawan', 1, '2014-05-02');
-INSERT INTO `jabatan_pegawai` VALUES (24, 'P-0010', 27, 'B-0002', 'karyawan', 1, '2016-09-10');
-INSERT INTO `jabatan_pegawai` VALUES (25, 'P-0011', 27, 'B-0003', 'koordinator', 1, '2010-10-20');
-INSERT INTO `jabatan_pegawai` VALUES (26, 'P-0012', 27, 'B-0003', 'karyawan', 1, '2011-02-10');
-INSERT INTO `jabatan_pegawai` VALUES (27, 'P-0013', 27, 'B-0003', 'karyawan', 1, '2012-11-10');
-INSERT INTO `jabatan_pegawai` VALUES (28, 'P-0014', 27, 'B-0003', 'karyawan', 1, '2015-07-02');
-INSERT INTO `jabatan_pegawai` VALUES (29, 'P-0015', 27, 'B-0003', 'karyawan', 1, '2016-10-10');
-INSERT INTO `jabatan_pegawai` VALUES (30, 'P-0016', 27, 'B-0004', 'koordinator', 1, '2009-03-10');
-INSERT INTO `jabatan_pegawai` VALUES (31, 'P-0017', 27, 'B-0004', 'karyawan', 1, '2010-07-27');
-INSERT INTO `jabatan_pegawai` VALUES (32, 'P-0018', 27, 'B-0004', 'karyawan', 1, '2013-01-21');
-INSERT INTO `jabatan_pegawai` VALUES (33, 'P-0019', 27, 'B-0004', 'karyawan', 1, '2015-11-02');
-INSERT INTO `jabatan_pegawai` VALUES (34, 'P-0020', 27, 'B-0004', 'karyawan', 1, '2015-12-02');
-INSERT INTO `jabatan_pegawai` VALUES (35, 'P-0021', 27, 'B-0005', 'koordinator', 1, '2009-04-12');
-INSERT INTO `jabatan_pegawai` VALUES (36, 'P-0022', 27, 'B-0005', 'karyawan', 1, '2010-12-10');
-INSERT INTO `jabatan_pegawai` VALUES (37, 'P-0023', 27, 'B-0005', 'karyawan', 1, '2011-05-01');
-INSERT INTO `jabatan_pegawai` VALUES (38, 'P-0024', 27, 'B-0005', 'karyawan', 1, '2014-10-02');
-INSERT INTO `jabatan_pegawai` VALUES (39, 'P-0025', 27, 'B-0005', 'karyawan', 1, '2014-11-20');
-INSERT INTO `jabatan_pegawai` VALUES (40, 'P-0026', 27, 'B-0007', 'koordinator', 1, '2010-10-20');
-INSERT INTO `jabatan_pegawai` VALUES (41, 'P-0027', 27, 'B-0007', 'karyawan', 1, '2011-02-10');
-INSERT INTO `jabatan_pegawai` VALUES (42, 'P-0028', 27, 'B-0007', 'karyawan', 1, '2012-11-10');
-INSERT INTO `jabatan_pegawai` VALUES (43, 'P-0029', 27, 'B-0007', 'karyawan', 1, '2015-02-02');
-INSERT INTO `jabatan_pegawai` VALUES (44, 'P-0030', 27, 'B-0007', 'karyawan', 1, '2015-07-07');
-INSERT INTO `jabatan_pegawai` VALUES (45, 'P-0031', 27, 'B-0001', 'koordinator', 1, '2009-02-21');
-INSERT INTO `jabatan_pegawai` VALUES (46, 'P-0032', 27, 'B-0001', 'karyawan', 1, '2011-09-10');
-INSERT INTO `jabatan_pegawai` VALUES (47, 'P-0033', 27, 'B-0001', 'karyawan', 1, '2011-10-11');
-INSERT INTO `jabatan_pegawai` VALUES (48, 'P-0034', 27, 'B-0001', 'karyawan', 1, '2011-10-11');
-INSERT INTO `jabatan_pegawai` VALUES (49, 'P-0035', 27, 'B-0001', 'karyawan', 1, '2013-08-25');
-INSERT INTO `jabatan_pegawai` VALUES (50, 'P-0036', 27, 'B-0006', 'koordinator', 1, '2009-05-12');
-INSERT INTO `jabatan_pegawai` VALUES (51, 'P-0037', 27, 'B-0006', 'karyawan', 1, '2010-12-10');
-INSERT INTO `jabatan_pegawai` VALUES (52, 'P-0038', 27, 'B-0006', 'karyawan', 1, '2011-11-11');
-INSERT INTO `jabatan_pegawai` VALUES (53, 'P-0039', 27, 'B-0006', 'karyawan', 1, '2012-08-05');
-INSERT INTO `jabatan_pegawai` VALUES (54, 'P-0040', 27, 'B-0006', 'karyawan', 1, '2012-08-05');
-INSERT INTO `jabatan_pegawai` VALUES (55, 'P-0041', 28, 'B-0001', 'koordinator', 1, '2010-01-20');
-INSERT INTO `jabatan_pegawai` VALUES (56, 'P-0042', 28, 'B-0001', 'karyawan', 1, '2011-02-10');
-INSERT INTO `jabatan_pegawai` VALUES (57, 'P-0043', 28, 'B-0001', 'karyawan', 1, '2012-11-10');
-INSERT INTO `jabatan_pegawai` VALUES (58, 'P-0044', 28, 'B-0001', 'karyawan', 1, '2015-07-02');
-INSERT INTO `jabatan_pegawai` VALUES (59, 'P-0045', 28, 'B-0001', 'karyawan', 1, '2016-09-10');
-INSERT INTO `jabatan_pegawai` VALUES (60, 'P-0046', 28, 'B-0002', 'koordinator', 1, '2009-08-17');
-INSERT INTO `jabatan_pegawai` VALUES (61, 'P-0047', 28, 'B-0002', 'karyawan', 1, '2011-09-07');
-INSERT INTO `jabatan_pegawai` VALUES (62, 'P-0048', 28, 'B-0002', 'karyawan', 1, '2011-09-09');
-INSERT INTO `jabatan_pegawai` VALUES (63, 'P-0049', 28, 'B-0002', 'karyawan', 1, '2013-05-10');
-INSERT INTO `jabatan_pegawai` VALUES (64, 'P-0050', 28, 'B-0002', 'karyawan', 1, '2014-09-04');
-INSERT INTO `jabatan_pegawai` VALUES (65, 'P-0051', 28, 'B-0003', 'koordinator', 1, '2010-05-21');
-INSERT INTO `jabatan_pegawai` VALUES (66, 'P-0052', 28, 'B-0003', 'karyawan', 1, '2010-06-05');
-INSERT INTO `jabatan_pegawai` VALUES (67, 'P-0053', 28, 'B-0003', 'karyawan', 1, '2010-06-05');
-INSERT INTO `jabatan_pegawai` VALUES (68, 'P-0054', 28, 'B-0003', 'karyawan', 1, '2013-09-10');
-INSERT INTO `jabatan_pegawai` VALUES (69, 'P-0055', 28, 'B-0003', 'karyawan', 1, '2015-09-05');
-INSERT INTO `jabatan_pegawai` VALUES (70, 'P-0056', 28, 'B-0004', 'koordinator', 1, '2009-12-11');
-INSERT INTO `jabatan_pegawai` VALUES (71, 'P-0057', 28, 'B-0004', 'karyawan', 1, '2010-10-05');
-INSERT INTO `jabatan_pegawai` VALUES (72, 'P-0058', 28, 'B-0004', 'karyawan', 1, '2010-10-05');
-INSERT INTO `jabatan_pegawai` VALUES (73, 'P-0059', 28, 'B-0004', 'karyawan', 1, '2014-04-04');
-INSERT INTO `jabatan_pegawai` VALUES (74, 'P-0060', 28, 'B-0004', 'karyawan', 1, '2016-04-04');
-INSERT INTO `jabatan_pegawai` VALUES (75, 'P-0061', 28, 'B-0005', 'koordinator', 1, '2009-06-21');
-INSERT INTO `jabatan_pegawai` VALUES (76, 'P-0062', 28, 'B-0005', 'karyawan', 1, '2010-08-20');
-INSERT INTO `jabatan_pegawai` VALUES (77, 'P-0063', 28, 'B-0005', 'karyawan', 1, '2010-08-20');
-INSERT INTO `jabatan_pegawai` VALUES (78, 'P-0064', 28, 'B-0005', 'karyawan', 1, '2013-09-21');
-INSERT INTO `jabatan_pegawai` VALUES (79, 'P-0065', 28, 'B-0005', 'karyawan', 1, '2015-10-02');
-INSERT INTO `jabatan_pegawai` VALUES (80, 'P-0066', 28, 'B-0006', 'koordinator', 1, '2010-11-10');
-INSERT INTO `jabatan_pegawai` VALUES (81, 'P-0067', 28, 'B-0006', 'karyawan', 1, '2011-11-10');
-INSERT INTO `jabatan_pegawai` VALUES (82, 'P-0068', 28, 'B-0006', 'karyawan', 1, '2011-12-10');
-INSERT INTO `jabatan_pegawai` VALUES (83, 'P-0069', 28, 'B-0006', 'karyawan', 1, '2011-12-10');
-INSERT INTO `jabatan_pegawai` VALUES (84, 'P-0070', 28, 'B-0006', 'karyawan', 1, '2012-12-12');
-INSERT INTO `jabatan_pegawai` VALUES (85, 'P-0071', 28, 'B-0007', 'koordinator', 1, '2011-09-10');
-INSERT INTO `jabatan_pegawai` VALUES (86, 'P-0072', 28, 'B-0007', 'karyawan', 1, '2012-09-10');
-INSERT INTO `jabatan_pegawai` VALUES (87, 'P-0073', 28, 'B-0007', 'karyawan', 1, '2012-10-11');
-INSERT INTO `jabatan_pegawai` VALUES (88, 'P-0074', 28, 'B-0007', 'karyawan', 1, '2012-10-11');
-INSERT INTO `jabatan_pegawai` VALUES (89, 'P-0075', 28, 'B-0007', 'karyawan', 1, '2015-09-04');
-INSERT INTO `jabatan_pegawai` VALUES (90, 'P-0076', 28, 'B-0008', 'koordinator', 1, '2011-05-05');
-INSERT INTO `jabatan_pegawai` VALUES (91, 'P-0077', 28, 'B-0008', 'karyawan', 1, '2012-06-05');
-INSERT INTO `jabatan_pegawai` VALUES (92, 'P-0078', 28, 'B-0008', 'karyawan', 1, '2012-06-05');
-INSERT INTO `jabatan_pegawai` VALUES (93, 'P-0079', 28, 'B-0008', 'karyawan', 1, '2014-07-07');
-INSERT INTO `jabatan_pegawai` VALUES (94, 'P-0080', 28, 'B-0008', 'karyawan', 1, '2014-08-07');
-INSERT INTO `jabatan_pegawai` VALUES (95, 'P-0081', 29, 'B-0001', 'koordinator', 1, '2010-06-26');
-INSERT INTO `jabatan_pegawai` VALUES (96, 'P-0082', 29, 'B-0001', 'karyawan', 1, '2012-07-26');
-INSERT INTO `jabatan_pegawai` VALUES (97, 'P-0083', 29, 'B-0001', 'karyawan', 1, '2012-07-26');
-INSERT INTO `jabatan_pegawai` VALUES (98, 'P-0084', 29, 'B-0001', 'karyawan', 1, '2014-09-05');
-INSERT INTO `jabatan_pegawai` VALUES (99, 'P-0085', 29, 'B-0001', 'karyawan', 1, '2014-09-05');
-INSERT INTO `jabatan_pegawai` VALUES (100, 'P-0086', 29, 'B-0002', 'koordinator', 1, '2008-12-25');
-INSERT INTO `jabatan_pegawai` VALUES (101, 'P-0087', 29, 'B-0002', 'karyawan', 1, '2010-01-02');
-INSERT INTO `jabatan_pegawai` VALUES (102, 'P-0088', 29, 'B-0002', 'karyawan', 1, '2010-02-03');
-INSERT INTO `jabatan_pegawai` VALUES (103, 'P-0089', 29, 'B-0002', 'karyawan', 1, '2010-02-03');
-INSERT INTO `jabatan_pegawai` VALUES (104, 'P-0090', 29, 'B-0002', 'karyawan', 1, '2014-08-31');
-INSERT INTO `jabatan_pegawai` VALUES (105, 'P-0091', 29, 'B-0003', 'koordinator', 1, '2009-12-05');
-INSERT INTO `jabatan_pegawai` VALUES (106, 'P-0092', 29, 'B-0003', 'karyawan', 1, '2010-11-05');
-INSERT INTO `jabatan_pegawai` VALUES (107, 'P-0093', 29, 'B-0003', 'karyawan', 1, '2011-07-06');
-INSERT INTO `jabatan_pegawai` VALUES (108, 'P-0094', 29, 'B-0003', 'karyawan', 1, '2011-07-08');
-INSERT INTO `jabatan_pegawai` VALUES (109, 'P-0095', 29, 'B-0003', 'karyawan', 1, '2011-07-08');
-INSERT INTO `jabatan_pegawai` VALUES (110, 'P-0096', 29, 'B-0004', 'koordinator', 1, '2010-03-25');
-INSERT INTO `jabatan_pegawai` VALUES (111, 'P-0097', 29, 'B-0004', 'karyawan', 1, '2010-03-26');
-INSERT INTO `jabatan_pegawai` VALUES (112, 'P-0098', 29, 'B-0004', 'karyawan', 1, '2011-07-02');
-INSERT INTO `jabatan_pegawai` VALUES (113, 'P-0099', 29, 'B-0004', 'karyawan', 1, '2011-07-02');
-INSERT INTO `jabatan_pegawai` VALUES (114, 'P-0100', 29, 'B-0004', 'karyawan', 1, '2011-11-20');
-INSERT INTO `jabatan_pegawai` VALUES (115, 'P-0101', 29, 'B-0005', 'koordinator', 1, '2009-06-05');
-INSERT INTO `jabatan_pegawai` VALUES (116, 'P-0102', 29, 'B-0005', 'karyawan', 1, '2010-07-05');
-INSERT INTO `jabatan_pegawai` VALUES (117, 'P-0103', 29, 'B-0005', 'karyawan', 1, '2010-07-25');
-INSERT INTO `jabatan_pegawai` VALUES (118, 'P-0104', 29, 'B-0005', 'karyawan', 1, '2011-10-10');
-INSERT INTO `jabatan_pegawai` VALUES (119, 'P-0105', 29, 'B-0005', 'karyawan', 1, '2011-10-11');
-INSERT INTO `jabatan_pegawai` VALUES (120, 'P-0106', 29, 'B-0006', 'koordinator', 1, '2010-12-12');
-INSERT INTO `jabatan_pegawai` VALUES (121, 'P-0107', 29, 'B-0006', 'karyawan', 1, '2011-11-12');
-INSERT INTO `jabatan_pegawai` VALUES (122, 'P-0108', 29, 'B-0006', 'karyawan', 1, '2011-11-12');
-INSERT INTO `jabatan_pegawai` VALUES (123, 'P-0109', 29, 'B-0006', 'karyawan', 1, '2012-04-24');
-INSERT INTO `jabatan_pegawai` VALUES (124, 'P-0110', 29, 'B-0006', 'karyawan', 1, '2012-05-25');
-INSERT INTO `jabatan_pegawai` VALUES (125, 'P-0111', 29, 'B-0007', 'koordinator', 1, '2009-05-15');
-INSERT INTO `jabatan_pegawai` VALUES (126, 'P-0112', 29, 'B-0007', 'karyawan', 1, '2010-05-15');
-INSERT INTO `jabatan_pegawai` VALUES (127, 'P-0113', 29, 'B-0007', 'karyawan', 1, '2011-06-16');
-INSERT INTO `jabatan_pegawai` VALUES (128, 'P-0114', 29, 'B-0007', 'karyawan', 1, '2011-07-20');
-INSERT INTO `jabatan_pegawai` VALUES (129, 'P-0115', 29, 'B-0007', 'karyawan', 1, '2012-08-21');
-INSERT INTO `jabatan_pegawai` VALUES (130, 'P-0116', 29, 'B-0008', 'koordinator', 1, '2010-10-06');
-INSERT INTO `jabatan_pegawai` VALUES (131, 'P-0117', 29, 'B-0008', 'karyawan', 1, '2012-07-07');
-INSERT INTO `jabatan_pegawai` VALUES (132, 'P-0118', 29, 'B-0008', 'karyawan', 1, '2012-07-08');
-INSERT INTO `jabatan_pegawai` VALUES (133, 'P-0119', 29, 'B-0008', 'karyawan', 1, '2012-09-09');
-INSERT INTO `jabatan_pegawai` VALUES (134, 'P-0120', 29, 'B-0008', 'karyawan', 1, '2013-10-09');
-INSERT INTO `jabatan_pegawai` VALUES (135, 'P-0121', 34, 'B-0009', 'HRD', 1, '1999-05-03');
-INSERT INTO `jabatan_pegawai` VALUES (136, 'P-0122', 34, 'B-0009', 'manager', 1, '2012-12-12');
+INSERT INTO `jabatan_pegawai` VALUES (15, 'P-0001', 27, 'B-0008', 'Kabag', 1, '2010-02-20');
+INSERT INTO `jabatan_pegawai` VALUES (16, 'P-0002', 27, 'B-0008', 'Pegawai', 1, '2011-02-10');
+INSERT INTO `jabatan_pegawai` VALUES (17, 'P-0003', 27, 'B-0008', 'Pegawai', 1, '2012-11-10');
+INSERT INTO `jabatan_pegawai` VALUES (18, 'P-0004', 27, 'B-0008', 'Pegawai', 1, '2015-07-20');
+INSERT INTO `jabatan_pegawai` VALUES (19, 'P-0005', 27, 'B-0008', 'Pegawai', 1, '2015-10-10');
+INSERT INTO `jabatan_pegawai` VALUES (20, 'P-0006', 27, 'B-0002', 'Kabag', 1, '2010-03-13');
+INSERT INTO `jabatan_pegawai` VALUES (21, 'P-0007', 27, 'B-0002', 'Pegawai', 1, '2010-10-12');
+INSERT INTO `jabatan_pegawai` VALUES (22, 'P-0008', 27, 'B-0002', 'Pegawai', 1, '2012-01-25');
+INSERT INTO `jabatan_pegawai` VALUES (23, 'P-0009', 27, 'B-0002', 'Pegawai', 1, '2014-05-02');
+INSERT INTO `jabatan_pegawai` VALUES (24, 'P-0010', 27, 'B-0002', 'Pegawai', 1, '2016-09-10');
+INSERT INTO `jabatan_pegawai` VALUES (25, 'P-0011', 27, 'B-0003', 'Kabag', 1, '2010-10-20');
+INSERT INTO `jabatan_pegawai` VALUES (26, 'P-0012', 27, 'B-0003', 'Pegawai', 1, '2011-02-10');
+INSERT INTO `jabatan_pegawai` VALUES (27, 'P-0013', 27, 'B-0003', 'Pegawai', 1, '2012-11-10');
+INSERT INTO `jabatan_pegawai` VALUES (28, 'P-0014', 27, 'B-0003', 'Pegawai', 1, '2015-07-02');
+INSERT INTO `jabatan_pegawai` VALUES (29, 'P-0015', 27, 'B-0003', 'Pegawai', 1, '2016-10-10');
+INSERT INTO `jabatan_pegawai` VALUES (30, 'P-0016', 27, 'B-0004', 'Kabag', 1, '2009-03-10');
+INSERT INTO `jabatan_pegawai` VALUES (31, 'P-0017', 27, 'B-0004', 'Pegawai', 1, '2010-07-27');
+INSERT INTO `jabatan_pegawai` VALUES (32, 'P-0018', 27, 'B-0004', 'Pegawai', 1, '2013-01-21');
+INSERT INTO `jabatan_pegawai` VALUES (33, 'P-0019', 27, 'B-0004', 'Pegawai', 1, '2015-11-02');
+INSERT INTO `jabatan_pegawai` VALUES (34, 'P-0020', 27, 'B-0004', 'Pegawai', 1, '2015-12-02');
+INSERT INTO `jabatan_pegawai` VALUES (35, 'P-0021', 27, 'B-0005', 'Kabag', 1, '2009-04-12');
+INSERT INTO `jabatan_pegawai` VALUES (36, 'P-0022', 27, 'B-0005', 'Pegawai', 1, '2010-12-10');
+INSERT INTO `jabatan_pegawai` VALUES (37, 'P-0023', 27, 'B-0005', 'Pegawai', 1, '2011-05-01');
+INSERT INTO `jabatan_pegawai` VALUES (38, 'P-0024', 27, 'B-0005', 'Pegawai', 1, '2014-10-02');
+INSERT INTO `jabatan_pegawai` VALUES (39, 'P-0025', 27, 'B-0005', 'Pegawai', 1, '2014-11-20');
+INSERT INTO `jabatan_pegawai` VALUES (40, 'P-0026', 27, 'B-0007', 'Kabag', 1, '2010-10-20');
+INSERT INTO `jabatan_pegawai` VALUES (41, 'P-0027', 27, 'B-0007', 'Pegawai', 1, '2011-02-10');
+INSERT INTO `jabatan_pegawai` VALUES (42, 'P-0028', 27, 'B-0007', 'Pegawai', 1, '2012-11-10');
+INSERT INTO `jabatan_pegawai` VALUES (43, 'P-0029', 27, 'B-0007', 'Pegawai', 1, '2015-02-02');
+INSERT INTO `jabatan_pegawai` VALUES (44, 'P-0030', 27, 'B-0007', 'Pegawai', 1, '2015-07-07');
+INSERT INTO `jabatan_pegawai` VALUES (45, 'P-0031', 27, 'B-0001', 'Kabag', 1, '2009-02-21');
+INSERT INTO `jabatan_pegawai` VALUES (46, 'P-0032', 27, 'B-0001', 'Pegawai', 1, '2011-09-10');
+INSERT INTO `jabatan_pegawai` VALUES (47, 'P-0033', 27, 'B-0001', 'Pegawai', 1, '2011-10-11');
+INSERT INTO `jabatan_pegawai` VALUES (48, 'P-0034', 27, 'B-0001', 'Pegawai', 1, '2011-10-11');
+INSERT INTO `jabatan_pegawai` VALUES (49, 'P-0035', 27, 'B-0001', 'Pegawai', 1, '2013-08-25');
+INSERT INTO `jabatan_pegawai` VALUES (50, 'P-0036', 27, 'B-0006', 'Kabag', 1, '2009-05-12');
+INSERT INTO `jabatan_pegawai` VALUES (51, 'P-0037', 27, 'B-0006', 'Pegawai', 1, '2010-12-10');
+INSERT INTO `jabatan_pegawai` VALUES (52, 'P-0038', 27, 'B-0006', 'Pegawai', 1, '2011-11-11');
+INSERT INTO `jabatan_pegawai` VALUES (53, 'P-0039', 27, 'B-0006', 'Pegawai', 1, '2012-08-05');
+INSERT INTO `jabatan_pegawai` VALUES (54, 'P-0040', 27, 'B-0006', 'Pegawai', 1, '2012-08-05');
+INSERT INTO `jabatan_pegawai` VALUES (55, 'P-0041', 28, 'B-0001', 'Kabag', 1, '2010-01-20');
+INSERT INTO `jabatan_pegawai` VALUES (56, 'P-0042', 28, 'B-0001', 'Pegawai', 1, '2011-02-10');
+INSERT INTO `jabatan_pegawai` VALUES (57, 'P-0043', 28, 'B-0001', 'Pegawai', 1, '2012-11-10');
+INSERT INTO `jabatan_pegawai` VALUES (58, 'P-0044', 28, 'B-0001', 'Pegawai', 1, '2015-07-02');
+INSERT INTO `jabatan_pegawai` VALUES (59, 'P-0045', 28, 'B-0001', 'Pegawai', 1, '2016-09-10');
+INSERT INTO `jabatan_pegawai` VALUES (60, 'P-0046', 28, 'B-0002', 'Kabag', 1, '2009-08-17');
+INSERT INTO `jabatan_pegawai` VALUES (61, 'P-0047', 28, 'B-0002', 'Pegawai', 1, '2011-09-07');
+INSERT INTO `jabatan_pegawai` VALUES (62, 'P-0048', 28, 'B-0002', 'Pegawai', 1, '2011-09-09');
+INSERT INTO `jabatan_pegawai` VALUES (63, 'P-0049', 28, 'B-0002', 'Pegawai', 1, '2013-05-10');
+INSERT INTO `jabatan_pegawai` VALUES (64, 'P-0050', 28, 'B-0002', 'Pegawai', 1, '2014-09-04');
+INSERT INTO `jabatan_pegawai` VALUES (65, 'P-0051', 28, 'B-0003', 'Kabag', 1, '2010-05-21');
+INSERT INTO `jabatan_pegawai` VALUES (66, 'P-0052', 28, 'B-0003', 'Pegawai', 1, '2010-06-05');
+INSERT INTO `jabatan_pegawai` VALUES (67, 'P-0053', 28, 'B-0003', 'Pegawai', 1, '2010-06-05');
+INSERT INTO `jabatan_pegawai` VALUES (68, 'P-0054', 28, 'B-0003', 'Pegawai', 1, '2013-09-10');
+INSERT INTO `jabatan_pegawai` VALUES (69, 'P-0055', 28, 'B-0003', 'Pegawai', 1, '2015-09-05');
+INSERT INTO `jabatan_pegawai` VALUES (70, 'P-0056', 28, 'B-0004', 'Kabag', 1, '2009-12-11');
+INSERT INTO `jabatan_pegawai` VALUES (71, 'P-0057', 28, 'B-0004', 'Pegawai', 1, '2010-10-05');
+INSERT INTO `jabatan_pegawai` VALUES (72, 'P-0058', 28, 'B-0004', 'Pegawai', 1, '2010-10-05');
+INSERT INTO `jabatan_pegawai` VALUES (73, 'P-0059', 28, 'B-0004', 'Pegawai', 1, '2014-04-04');
+INSERT INTO `jabatan_pegawai` VALUES (74, 'P-0060', 28, 'B-0004', 'Pegawai', 1, '2016-04-04');
+INSERT INTO `jabatan_pegawai` VALUES (75, 'P-0061', 28, 'B-0005', 'Kabag', 1, '2009-06-21');
+INSERT INTO `jabatan_pegawai` VALUES (76, 'P-0062', 28, 'B-0005', 'Pegawai', 1, '2010-08-20');
+INSERT INTO `jabatan_pegawai` VALUES (77, 'P-0063', 28, 'B-0005', 'Pegawai', 1, '2010-08-20');
+INSERT INTO `jabatan_pegawai` VALUES (78, 'P-0064', 28, 'B-0005', 'Pegawai', 1, '2013-09-21');
+INSERT INTO `jabatan_pegawai` VALUES (79, 'P-0065', 28, 'B-0005', 'Pegawai', 1, '2015-10-02');
+INSERT INTO `jabatan_pegawai` VALUES (80, 'P-0066', 28, 'B-0006', 'Kabag', 1, '2010-11-10');
+INSERT INTO `jabatan_pegawai` VALUES (81, 'P-0067', 28, 'B-0006', 'Pegawai', 1, '2011-11-10');
+INSERT INTO `jabatan_pegawai` VALUES (82, 'P-0068', 28, 'B-0006', 'Pegawai', 1, '2011-12-10');
+INSERT INTO `jabatan_pegawai` VALUES (83, 'P-0069', 28, 'B-0006', 'Pegawai', 1, '2011-12-10');
+INSERT INTO `jabatan_pegawai` VALUES (84, 'P-0070', 28, 'B-0006', 'Pegawai', 1, '2012-12-12');
+INSERT INTO `jabatan_pegawai` VALUES (85, 'P-0071', 28, 'B-0007', 'Kabag', 1, '2011-09-10');
+INSERT INTO `jabatan_pegawai` VALUES (86, 'P-0072', 28, 'B-0007', 'Pegawai', 1, '2012-09-10');
+INSERT INTO `jabatan_pegawai` VALUES (87, 'P-0073', 28, 'B-0007', 'Pegawai', 1, '2012-10-11');
+INSERT INTO `jabatan_pegawai` VALUES (88, 'P-0074', 28, 'B-0007', 'Pegawai', 1, '2012-10-11');
+INSERT INTO `jabatan_pegawai` VALUES (89, 'P-0075', 28, 'B-0007', 'Pegawai', 1, '2015-09-04');
+INSERT INTO `jabatan_pegawai` VALUES (90, 'P-0076', 28, 'B-0008', 'Kabag', 1, '2011-05-05');
+INSERT INTO `jabatan_pegawai` VALUES (91, 'P-0077', 28, 'B-0008', 'Pegawai', 1, '2012-06-05');
+INSERT INTO `jabatan_pegawai` VALUES (92, 'P-0078', 28, 'B-0008', 'Pegawai', 1, '2012-06-05');
+INSERT INTO `jabatan_pegawai` VALUES (93, 'P-0079', 28, 'B-0008', 'Pegawai', 1, '2014-07-07');
+INSERT INTO `jabatan_pegawai` VALUES (94, 'P-0080', 28, 'B-0008', 'Pegawai', 1, '2014-08-07');
+INSERT INTO `jabatan_pegawai` VALUES (95, 'P-0081', 29, 'B-0001', 'Kabag', 1, '2010-06-26');
+INSERT INTO `jabatan_pegawai` VALUES (96, 'P-0082', 29, 'B-0001', 'Pegawai', 1, '2012-07-26');
+INSERT INTO `jabatan_pegawai` VALUES (97, 'P-0083', 29, 'B-0001', 'Pegawai', 1, '2012-07-26');
+INSERT INTO `jabatan_pegawai` VALUES (98, 'P-0084', 29, 'B-0001', 'Pegawai', 1, '2014-09-05');
+INSERT INTO `jabatan_pegawai` VALUES (99, 'P-0085', 29, 'B-0001', 'Pegawai', 1, '2014-09-05');
+INSERT INTO `jabatan_pegawai` VALUES (100, 'P-0086', 29, 'B-0002', 'Kabag', 1, '2008-12-25');
+INSERT INTO `jabatan_pegawai` VALUES (101, 'P-0087', 29, 'B-0002', 'Pegawai', 1, '2010-01-02');
+INSERT INTO `jabatan_pegawai` VALUES (102, 'P-0088', 29, 'B-0002', 'Pegawai', 1, '2010-02-03');
+INSERT INTO `jabatan_pegawai` VALUES (103, 'P-0089', 29, 'B-0002', 'Pegawai', 1, '2010-02-03');
+INSERT INTO `jabatan_pegawai` VALUES (104, 'P-0090', 29, 'B-0002', 'Pegawai', 1, '2014-08-31');
+INSERT INTO `jabatan_pegawai` VALUES (105, 'P-0091', 29, 'B-0003', 'Kabag', 1, '2009-12-05');
+INSERT INTO `jabatan_pegawai` VALUES (106, 'P-0092', 29, 'B-0003', 'Pegawai', 1, '2010-11-05');
+INSERT INTO `jabatan_pegawai` VALUES (107, 'P-0093', 29, 'B-0003', 'Pegawai', 1, '2011-07-06');
+INSERT INTO `jabatan_pegawai` VALUES (108, 'P-0094', 29, 'B-0003', 'Pegawai', 1, '2011-07-08');
+INSERT INTO `jabatan_pegawai` VALUES (109, 'P-0095', 29, 'B-0003', 'Pegawai', 1, '2011-07-08');
+INSERT INTO `jabatan_pegawai` VALUES (110, 'P-0096', 29, 'B-0004', 'Kabag', 1, '2010-03-25');
+INSERT INTO `jabatan_pegawai` VALUES (111, 'P-0097', 29, 'B-0004', 'Pegawai', 1, '2010-03-26');
+INSERT INTO `jabatan_pegawai` VALUES (112, 'P-0098', 29, 'B-0004', 'Pegawai', 1, '2011-07-02');
+INSERT INTO `jabatan_pegawai` VALUES (113, 'P-0099', 29, 'B-0004', 'Pegawai', 1, '2011-07-02');
+INSERT INTO `jabatan_pegawai` VALUES (114, 'P-0100', 29, 'B-0004', 'Pegawai', 1, '2011-11-20');
+INSERT INTO `jabatan_pegawai` VALUES (115, 'P-0101', 29, 'B-0005', 'Kabag', 1, '2009-06-05');
+INSERT INTO `jabatan_pegawai` VALUES (116, 'P-0102', 29, 'B-0005', 'Pegawai', 1, '2010-07-05');
+INSERT INTO `jabatan_pegawai` VALUES (117, 'P-0103', 29, 'B-0005', 'Pegawai', 1, '2010-07-25');
+INSERT INTO `jabatan_pegawai` VALUES (118, 'P-0104', 29, 'B-0005', 'Pegawai', 1, '2011-10-10');
+INSERT INTO `jabatan_pegawai` VALUES (119, 'P-0105', 29, 'B-0005', 'Pegawai', 1, '2011-10-11');
+INSERT INTO `jabatan_pegawai` VALUES (120, 'P-0106', 29, 'B-0006', 'Kabag', 1, '2010-12-12');
+INSERT INTO `jabatan_pegawai` VALUES (121, 'P-0107', 29, 'B-0006', 'Pegawai', 1, '2011-11-12');
+INSERT INTO `jabatan_pegawai` VALUES (122, 'P-0108', 29, 'B-0006', 'Pegawai', 1, '2011-11-12');
+INSERT INTO `jabatan_pegawai` VALUES (123, 'P-0109', 29, 'B-0006', 'Pegawai', 1, '2012-04-24');
+INSERT INTO `jabatan_pegawai` VALUES (124, 'P-0110', 29, 'B-0006', 'Pegawai', 1, '2012-05-25');
+INSERT INTO `jabatan_pegawai` VALUES (125, 'P-0111', 29, 'B-0007', 'Kabag', 1, '2009-05-15');
+INSERT INTO `jabatan_pegawai` VALUES (126, 'P-0112', 29, 'B-0007', 'Pegawai', 1, '2010-05-15');
+INSERT INTO `jabatan_pegawai` VALUES (127, 'P-0113', 29, 'B-0007', 'Pegawai', 1, '2011-06-16');
+INSERT INTO `jabatan_pegawai` VALUES (128, 'P-0114', 29, 'B-0007', 'Pegawai', 1, '2011-07-20');
+INSERT INTO `jabatan_pegawai` VALUES (129, 'P-0115', 29, 'B-0007', 'Pegawai', 1, '2012-08-21');
+INSERT INTO `jabatan_pegawai` VALUES (130, 'P-0116', 29, 'B-0008', 'Kabag', 1, '2010-10-06');
+INSERT INTO `jabatan_pegawai` VALUES (131, 'P-0117', 29, 'B-0008', 'Pegawai', 1, '2012-07-07');
+INSERT INTO `jabatan_pegawai` VALUES (132, 'P-0118', 29, 'B-0008', 'Pegawai', 1, '2012-07-08');
+INSERT INTO `jabatan_pegawai` VALUES (133, 'P-0119', 29, 'B-0008', 'Pegawai', 1, '2012-09-09');
+INSERT INTO `jabatan_pegawai` VALUES (134, 'P-0120', 29, 'B-0008', 'Pegawai', 1, '2013-10-09');
+INSERT INTO `jabatan_pegawai` VALUES (135, 'P-0121', 34, 'B-0009', 'Kapus', 1, '1999-05-03');
+INSERT INTO `jabatan_pegawai` VALUES (136, 'P-0122', 34, 'B-0009', 'Admin', 1, '2012-12-12');
+INSERT INTO `jabatan_pegawai` VALUES (137, 'P-0123', 27, 'B-0001', 'Admin', 1, '2021-07-13');
 
 -- ----------------------------
 -- Table structure for kriteria
@@ -1819,6 +1831,8 @@ INSERT INTO `pegawai` VALUES ('P-0119', 'Koko', 'Bantul', '1990-07-04', 'L', 'Is
 INSERT INTO `pegawai` VALUES ('P-0120', 'Ali', 'Sleman', '1992-11-05', 'L', 'Islam', 'Belum kawin', '089754567851', 'Jalan Jogja - Solo', '2013-10-09');
 INSERT INTO `pegawai` VALUES ('P-0121', 'Sulistio', 'Yogyakarta', '1972-03-19', 'L', 'Islam', 'Kawin', '082244413456', 'Yogyakarta', '1998-05-12');
 INSERT INTO `pegawai` VALUES ('P-0122', 'Wildan', 'Sleman', '1984-08-01', 'L', 'Islam', 'Kawin', '081234567800', 'Sleman', '2012-12-12');
+INSERT INTO `pegawai` VALUES ('P-0123', 'Okki Setyawan', 'Jakarta', '2021-07-13', 'L', 'Islam', 'Kawin', '087889677228', 'bekasi', '2021-07-13');
+INSERT INTO `pegawai` VALUES ('P-0124', 'Joni Iskandar', 'Jakarta', '2021-07-14', 'L', 'Islam', 'Kawin', '87889677228', 'bekasi', '2021-07-14');
 
 -- ----------------------------
 -- Table structure for pendukung
@@ -1830,13 +1844,14 @@ CREATE TABLE `pendukung`  (
   `file_pendukung` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `nama_kegiatan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pendukung
 -- ----------------------------
 INSERT INTO `pendukung` VALUES (5, 'P-0008', 'gila.jpg', 'makan');
 INSERT INTO `pendukung` VALUES (6, 'P-0008', 'dodol.png', 'makan nasi');
+INSERT INTO `pendukung` VALUES (7, 'P-0003', '212979266_3989100527805197_8047717420159074046_n.jpg', 'madang bos');
 
 -- ----------------------------
 -- Table structure for penilaian
@@ -2012,7 +2027,7 @@ CREATE TABLE `unit_kerja`  (
   `nama_unit_kerja` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `alamat_unit_kerja` text CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`id_unit_kerja`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of unit_kerja

@@ -17,8 +17,8 @@
                             <label class="control-label col-sm-4" for="jabatan">Jabatan : </label>
                             <div class="col-sm-6">
                                  <select  class="form-control" name="jabatan" id="jabatan">  
-                                   <option value="koordinator">Koordinator</option>
-                                   <option value="karyawan">Karyawan</option>
+                                   <option value="Kabag">Kabag</option>
+                                   <option value="Pegawai">Pegawai</option>
                                 </select> 
                             </div>
                         </div>
