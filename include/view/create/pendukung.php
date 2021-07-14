@@ -1,7 +1,15 @@
 <?php
-$pegawai=("SELECT A.no_pegawai,A.nama from pegawai A
-        LEFT JOIN user B ON A.no_pegawai=B.id_pegawai
-		WHERE B.id_pegawai IS NULL ");
+ 
+if($hak_akses==4){
+    $pegawai=("SELECT a.* FROM pegawai a
+    LEFT JOIN jabatan_pegawai b on b.id_pegawai = a.no_pegawai
+    LEFT JOIN user c on c.id_pegawai = a.no_pegawai where c.user_name = '$username' ");
+}else{
+    $pegawai=("SELECT A.no_pegawai,A.nama from pegawai A
+    LEFT JOIN user B ON A.no_pegawai=B.id_pegawai ");
+}
+ 
+
     $pegawai_query = mysqli_query($db_link,$pegawai);
 ?>
 
