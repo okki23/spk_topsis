@@ -150,7 +150,7 @@ echo '<h2 class="text-center">USULAN PEGAWAI TERBAIK</h2>';
                     
                 <thead class="panel-heading">
                 <tr>
-                    <th class="text-center" rowspan="2" style="vertical-align: middle;">RANGKING</th>
+                    <th class="text-center" rowspan="2" style="vertical-align: middle;">RANGKINGs</th>
                     <th class="text-center" rowspan="2" style="vertical-align: middle;">NO PEGAWAI</th>
                     <th class="text-center" rowspan="2" style="vertical-align: middle;">NAMA PEGAWAI</th>
                     <th class="text-center" rowspan="2" style="vertical-align: middle;">PAMELLA</th>
@@ -182,23 +182,53 @@ echo '<h2 class="text-center">USULAN PEGAWAI TERBAIK</h2>';
                 <td>{$data_rangking['jabatan']}</td>
                 <td>".date("d-m-Y", strtotime($data_rangking['tgl_penilaian']))."</td>";
             echo "</tr>";
-            echo "<input type='hidden' name='no_peg$s' value='".$data_rangking['no_pegawai']."'>";
-            echo "<input type='hidden' name='nama_peg$s' value='".$data_rangking['nama']."'>";
-            echo "<input type='hidden' name='unit_kerja_kerja$s' value='".$data_rangking['unit_kerja']."'>";
-            echo "<input type='hidden' name='nilai_kerja$s' value='".$data_rangking['nilai']."'>";
-            echo "<input type='hidden' name='bagian$s' value='".$data_rangking['bagian']."'>";
-            echo "<input type='hidden' name='jabatan_peg$s' value='".$data_rangking['jabatan']."'>";
-            echo "<input type='hidden' name='tgl_rangking$s' value='".$data_rangking['tgl_penilaian']."'>";
+            echo "<input type='hidden' class='simpenidnye' name='no_peg[$s]' value='".$data_rangking['no_pegawai']."'>";
+            echo "<input type='hidden' class='simpenidnye' name='nama_peg[$s]' value='".$data_rangking['nama']."'>";
+            echo "<input type='hidden' class='simpenidnye' name='unit_kerja[$s]' value='".$data_rangking['unit_kerja']."'>";
+            echo "<input type='hidden' class='simpenidnye' name='nilai_kerja[$s]' value='".$data_rangking['nilai']."'>";
+            echo "<input type='hidden' class='simpenidnye' name='bagian[$s]' value='".$data_rangking['bagian']."'>";
+            echo "<input type='hidden' class='simpenidnye' name='jabatan_peg[$s]' value='".$data_rangking['jabatan']."'>";
+            echo "<input type='hidden' class='simpenidnye' name='tgl_rangking[$s]' value='".$data_rangking['tgl_penilaian']."'>";
             $number=$s;
         $s++;
         }
+
+        echo "    </tbody>
+        </table> <br> &nbsp;
+        
+        <button id='disimpen' class='btn btn-primary'>  SIMPEN! </button>" ;
 ?>
 
 <script src="../vendor/jquery/jquery.min.js"></script>
 <script>
-   var penilaiancount=<?php echo $number; ?>;
-          
+    // var jumlahlemparan = <?php echo $number; ?>;
+    // var idnya = $('.simpenidnye').serialize();
+    $("#disimpen").on("click",function(){
+        $.ajax({
+            url: "../include/kontrol/kontrol_usulan_new.php",
+            type: "POST",
+            data: $('.simpenidnye').serialize(),
+            success: function(data) { 
+                if (data=='berhasil'){
+                         $('#pesan_berhasil').text("Usulan Pegawai Berhasil Ditambah");
+                        $("#hasil").show();
+                        setTimeout(function(){
+                            $("#hasil").hide(); 
+                        }, 2000);
+                  }
+                  else {
+                        $('#pesan_gagal').text("Usulan Pegawai Gagal Ditambah");
+                        $("#gagal").show();
+                        setTimeout(function(){
+                            $("#gagal").hide(); 
+                        }, 2000);
 
+                  }
+            }
+        });
+    });
+    var penilaiancount=<?php echo $number; ?>;
+        
 </script>
 
    

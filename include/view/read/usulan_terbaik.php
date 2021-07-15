@@ -86,8 +86,7 @@ $bag=mysqli_query($db_link,"SELECT id_bagian,bagian FROM bagian");
             </div>
             <br/>
         <div class="point"></div>
-    </tbody>
-    </table>
+
                      
 		</div>
       <div class="text-center"  id="show">	
