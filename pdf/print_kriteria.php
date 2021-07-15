@@ -1,7 +1,7 @@
 <?php //ob_start(); ?>
 <html>
 <head>
-	<title>Pamella Supermarket</title>
+	<title>Aplikasi Penilaian Pegawai Terbaik, Pusat Pengembangan Talenta, BPSDM, PUPR</title>
 </head>
 <body>
 	

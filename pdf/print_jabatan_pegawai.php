@@ -1,7 +1,7 @@
 <?php //ob_start(); ?>
 <html>
 <head>
-	<title>Pamella Supermarket</title>
+	<title>Aplikasi Penilaian Pegawai Terbaik, Pusat Pengembangan Talenta, BPSDM, PUPR</title>
 </head>
 <body>
 	
@@ -11,7 +11,7 @@
 <tr>
 	<th>No Pegawai</th>
 	<th>Nama Pegawai</th>
-	<th>Toko</th>
+	<th>Unit Kerja</th>
 	<th>Bagian</th>
 	<th>Jabatan</th>
 	<th>Mulai Tugas</th>
@@ -20,10 +20,10 @@
 // Load file koneksi.php
 include "../koneksi.php";
  
-		$query = "SELECT A.id_jabatan,B.no_pegawai,B.nama,C.nama_toko,D.bagian,A.jabatan,A.tgl_jabat
+		$query = "SELECT A.id_jabatan,B.no_pegawai,B.nama,C.nama_unit_kerja,D.bagian,A.jabatan,A.tgl_jabat
                                     FROM jabatan_pegawai A
                                     INNER JOIN pegawai B ON A.id_pegawai=B.no_pegawai
-                                    INNER JOIN toko C ON A.id_toko=C.id_toko
+                                    INNER JOIN unit_kerja C ON A.id_unit_kerja=C.id_unit_kerja
                                     INNER JOIN bagian D ON A.id_bagian=D.id_bagian 
                                     WHERE A.Status=1 ORDER BY B.no_pegawai";
 		$sql = mysqli_query($db_link, $query);
@@ -34,7 +34,7 @@ include "../koneksi.php";
         echo "<tr>";
 		echo "<td>".$data['no_pegawai']."</td>";
         echo "<td>".$data['nama']."</td>";
-		echo "<td>".$data['nama_toko']."</td>";
+		echo "<td>".$data['nama_unit_kerja']."</td>";
 		echo "<td>".$data['bagian']."</td>";
 		echo "<td>";
 		echo ucwords($data['jabatan']); 

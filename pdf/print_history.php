@@ -4,7 +4,7 @@ $end	=$_GET['end'];
 ?>
 <html>
 <head>
-	<title>Pamella Supermarket</title>
+	<title>Aplikasi Penilaian Pegawai Terbaik, Pusat Pengembangan Talenta, BPSDM, PUPR</title>
 </head>
 <body onLoad="window.print()">
 
@@ -41,7 +41,7 @@ $hasil_rangking=mysqli_query($db_link,$sql_rangking);
                 <td align='center'>".$s."</td>
                 <td align='center'>{$data_rangking['no_pegawai']}</td>
                 <td>&nbsp;&nbsp;{$data_rangking['nama_pegawai']}</td>
-                <td>{$data_rangking['nama_toko']}</td>
+                <td>{$data_rangking['nama_unit_kerja']}</td>
                 <td>".$data_rangking['nilai']."</td>
                 <td>{$data_rangking['bagian']}</td>
                 <td>{$data_rangking['jabatan']}</td>
