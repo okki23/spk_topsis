@@ -26,6 +26,6 @@ if ($data['hak_akses']=='4') {echo 'Pegawai';}
 </span>
 
  <br /> <br />
-<b>DI APLIKASI SPK TOPSIS</b>
+<b>Aplikasi Penilaian Pegawai Terbaik, Pusat Pengembangan Talenta, BPSDM, PUPR</b>
 </h1>
 </div>

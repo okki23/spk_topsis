@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SPK TOPSIS</title>
+    <title>Aplikasi Penilaian Pegawai Terbaik, Pusat Pengembangan Talenta, BPSDM, PUPR</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -60,7 +60,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">SPK TOPSIS</a>
+                <a class="navbar-brand" href="index.php?navigasi=dashboard">Aplikasi Penilaian Pegawai Terbaik, Pusat Pengembangan Talenta, BPSDM, PUPR</a>
             </div>
             <!-- /.navbar-header -->
 
